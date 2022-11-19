@@ -49,9 +49,13 @@ public class ApplicationUserDetailService implements UserDetailsService {
 
         String userName = generator.getUserName( token );
 
-         repository.findByEmail( userName  ).orElseThrow( ()->new UserDoesNotExtistException( "User doesn't exist!" ) );
+        return repository
+                .findByEmail( userName )
+                .orElseThrow( ()->
+                        new UserDoesNotExtistException( "User doesn't exist!" )
+                );
 
-        return null;
+
     }
 
     private Collection<GrantedAuthority> mapRoleToUser(List<Role> roleList){

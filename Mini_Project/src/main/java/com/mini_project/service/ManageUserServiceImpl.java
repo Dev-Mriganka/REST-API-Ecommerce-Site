@@ -23,6 +23,8 @@ public class ManageUserServiceImpl implements ManageUserService{
     private UserEntityRepository userEntityRepository;
 
     @Autowired
+    ApplicationUserDetailService applicationUserDetailService;
+    @Autowired
     private AuthenticationManager manager;
 
     @Autowired
@@ -74,4 +76,43 @@ public class ManageUserServiceImpl implements ManageUserService{
         return new AuthenticatedResponseDto(token);
 
     }
+
+    @Override
+    public String addAddress(Address address, String token) {
+
+        generator.validateToken( token ) ;
+        UserModel model = applicationUserDetailService.loadUser( token );
+
+        if( model.getAddress().add( address ) )
+            throw new RuntimeException( "Address already added" );
+
+        userEntityRepository.save( model );
+
+
+        return "Address added successfully";
+
+    }
+
+
+    @Override
+    public String changePassword(String password, String token) {
+
+        generator.validateToken( token ) ;
+        UserModel model = applicationUserDetailService.loadUser( token );
+
+        model.setPassword( passwordEncoder.encode( password ) ) ;
+
+        userEntityRepository.save(model);
+
+        return "Password has been updated";
+    }
+
+    public boolean authenthicateUser( String token ){
+
+        generator.validateToken( token );
+        applicationUserDetailService.loadUserByUsername( token );
+        
+        return true;
+    }
+
 }
