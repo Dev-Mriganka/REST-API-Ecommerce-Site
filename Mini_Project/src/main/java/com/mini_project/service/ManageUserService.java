@@ -10,8 +10,8 @@ public interface ManageUserService {
     public String registerCustomer(RegisterDto registerDto ) ;
     public AuthenticatedResponseDto loginUser(UserLoginDto loginDto);
 
-    public String addAddress(Address address , String token);
-    public String changePassword( String password , String token );
+    public String addAddress(Address address );
+    public String changePassword( String password  );
 
 
 }
