@@ -1,8 +1,19 @@
 package com.mini_project.security;
 
 import com.mini_project.service.ApplicationUserDetailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.lang.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -26,6 +37,23 @@ public class JwtAuthenthicationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        String token = getJwtTokenFromRequest( request );
+
+        if( StringUtils.hasText(token) && generator.validateToken( token ) ){
+
+            String username = generator.getUserName( token );
+            UserDetails userDetails =  service.loadUserByUsername( username );
+
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails , null , userDetails.getAuthorities());
+
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+        }
+
+        filterChain.doFilter( request , response );
+
     }
 
     public String getJwtTokenFromRequest( HttpServletRequest request ){
@@ -33,6 +61,16 @@ public class JwtAuthenthicationFilter extends OncePerRequestFilter {
         String bearer = request.getHeader( "Authorization" );
 
         return null;
+
+        if(StringUtils.hasText( bearer ) && bearer.startsWith( "Bearer " ) ){
+
+            String token = bearer.substring( 7 );
+
+            return token;
+        }
+
+        return null;
+
     }
 
 
