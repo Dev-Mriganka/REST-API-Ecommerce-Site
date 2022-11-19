@@ -1,6 +1,7 @@
 package com.mini_project.service;
 
 import com.mini_project.exception.UserAlreadyExsistException;
+import com.mini_project.exception.UserDoesNotExtistException;
 import com.mini_project.model.*;
 import com.mini_project.repository.RoleEntityRepository;
 import com.mini_project.repository.UserEntityRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -78,10 +80,9 @@ public class ManageUserServiceImpl implements ManageUserService{
     }
 
     @Override
-    public String addAddress(Address address, String token) {
+    public String addAddress(Address address) {
 
-        generator.validateToken( token ) ;
-        UserModel model = applicationUserDetailService.loadUser( token );
+        UserModel model = getUser();
 
         if( model.getAddress().add( address ) )
             throw new RuntimeException( "Address already added" );
@@ -95,10 +96,9 @@ public class ManageUserServiceImpl implements ManageUserService{
 
 
     @Override
-    public String changePassword(String password, String token) {
+    public String changePassword(String password ) {
 
-        generator.validateToken( token ) ;
-        UserModel model = applicationUserDetailService.loadUser( token );
+        UserModel model = getUser();
 
         model.setPassword( passwordEncoder.encode( password ) ) ;
 
@@ -107,12 +107,18 @@ public class ManageUserServiceImpl implements ManageUserService{
         return "Password has been updated";
     }
 
-    public boolean authenthicateUser( String token ){
+    public UserModel getUser(  ){
 
-        generator.validateToken( token );
-        applicationUserDetailService.loadUserByUsername( token );
-        
-        return true;
+        UserDetails userDetails = (UserDetails) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+
+        return userEntityRepository.findByEmail(username)
+                .orElseThrow( () ->
+                        new UserDoesNotExtistException("User doesn't exist") );
+
     }
 
 }
