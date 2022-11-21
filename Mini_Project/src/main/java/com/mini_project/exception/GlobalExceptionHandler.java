@@ -6,17 +6,34 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-
 import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<MyErrorDetails> HandleExtraException(Exception exception , WebRequest request){
-		MyErrorDetails errorDetails = new MyErrorDetails(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
-		return new ResponseEntity<MyErrorDetails>(errorDetails,HttpStatus.BAD_REQUEST);
-	}
+
+  
+ @ExceptionHandler( MethodArgumentNotValidException.class )
+ public ResponseEntity<ErrorDetail> methodArgumentNotValidHandler(
+                MethodArgumentNotValidException methodArgumentNotValidException
+                )
+ {
+        ErrorDetail errorDetail;
+        errorDetail = new ErrorDetail( "Validation error",
+                methodArgumentNotValidException
+                        .getBindingResult()
+                        .getFieldError()
+                        .getDefaultMessage()   );
+        return new ResponseEntity<>(errorDetail , HttpStatus.BAD_REQUEST );
+ }
+
+ @ExceptionHandler(Exception.class)
+ public ResponseEntity<ErrorDetail> anyExceptionHandlerMethod(Exception e, WebRequest webRequest){
+
+      ErrorDetail errorDetail = new ErrorDetail( e.getMessage(), webRequest.getDescription(false) );
+
+      return new ResponseEntity<>( errorDetail , HttpStatus.BAD_REQUEST );
+  }
 
 	/*
 	@ExceptionHandler(BeneficiaryDetailException.class)
@@ -49,9 +66,5 @@ public class GlobalExceptionHandler {
 		MyErrorDetails errorDetails = new MyErrorDetails(LocalDateTime.now(), billPaymentException.getMessage(), request.getDescription(false));
 		return new ResponseEntity<MyErrorDetails>(errorDetails,HttpStatus.BAD_REQUEST);
 	}
-
-
-
-	*/
-	
+  */
 }

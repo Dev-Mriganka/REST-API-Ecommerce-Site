@@ -45,19 +45,6 @@ public class ApplicationUserDetailService implements UserDetailsService {
                         );
     }
 
-    public UserModel loadUser( String token ){
-
-        String userName = generator.getUserName( token );
-
-        return repository
-                .findByEmail( userName )
-                .orElseThrow( ()->
-                        new UserDoesNotExtistException( "User doesn't exist!" )
-                );
-
-
-    }
-
     private Collection<GrantedAuthority> mapRoleToUser(List<Role> roleList){
 
         return roleList
