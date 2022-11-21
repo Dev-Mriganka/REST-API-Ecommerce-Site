@@ -1,9 +1,6 @@
 package com.mini_project.cotroller;
 
-import com.mini_project.model.AuthenticatedResponseDto;
-import com.mini_project.model.RegisterDto;
-import com.mini_project.model.UserLoginDto;
-import com.mini_project.model.UserModel;
+import com.mini_project.model.*;
 import com.mini_project.repository.UserEntityRepository;
 import com.mini_project.security.TokenGenerator;
 import com.mini_project.service.ManageUserService;
@@ -14,10 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -48,6 +42,23 @@ public class ManageUserController {
         AuthenticatedResponseDto responseDto = manageService.loginUser(logindto);
 
         return new ResponseEntity<>( responseDto , HttpStatus.OK );
+    }
+
+    @PutMapping("/address")
+    public ResponseEntity<UserModel> addAddress(@RequestBody Address address){
+        System.out.println( address.toString() );
+        manageService.addAddress( address );
+
+        return new ResponseEntity<>( manageService.getUser() , HttpStatus.CREATED );
+
+    }
+
+    @PutMapping
+    public ResponseEntity<String> changePassoword( @RequestBody ChangeUserPasswordDto changePasswordDto ){
+
+        String s = manageService.changePassword( changePasswordDto );
+
+        return new ResponseEntity<>(  s  , HttpStatus.OK );
     }
 
 

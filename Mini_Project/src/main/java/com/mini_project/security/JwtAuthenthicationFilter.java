@@ -51,6 +51,8 @@ public class JwtAuthenthicationFilter extends OncePerRequestFilter {
 
     }
 
+//    Need to be Fixed on sending request wrong
+//    token with spelling mistake should throw porper error mssg
     public String getJwtTokenFromRequest( HttpServletRequest request ){
 
         String bearer = request.getHeader( "Authorization" );
@@ -61,6 +63,7 @@ public class JwtAuthenthicationFilter extends OncePerRequestFilter {
 
             return token;
         }
+
 
         return null;
 

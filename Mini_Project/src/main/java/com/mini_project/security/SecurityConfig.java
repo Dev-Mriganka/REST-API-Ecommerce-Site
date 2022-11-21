@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
@@ -41,7 +42,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        HttpBasicConfigurer<HttpSecurity> httpSecuritySessionManagementConfigurer = http
+            http
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPoint)
@@ -50,7 +51,8 @@ public class SecurityConfig {
                 .sessionCreationPolicy( STATELESS )
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
+                    .antMatchers("/**")
+                    .permitAll()
                 .and()
                 .httpBasic();
 

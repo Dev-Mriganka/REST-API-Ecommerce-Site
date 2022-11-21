@@ -19,6 +19,8 @@ public class ErrorDetail {
 
     public ErrorDetail( String mssg , String description ){
         this();
+        this.mssg = mssg;
+        this.description = description;
     }
 
 }

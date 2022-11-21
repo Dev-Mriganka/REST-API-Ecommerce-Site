@@ -84,7 +84,7 @@ public class ManageUserServiceImpl implements ManageUserService{
 
         UserModel model = getUser();
 
-        if( model.getAddress().add( address ) )
+        if( ! model.getAddress().add( address ) )
             throw new RuntimeException( "Address already added" );
 
         userEntityRepository.save( model );
@@ -96,18 +96,29 @@ public class ManageUserServiceImpl implements ManageUserService{
 
 
     @Override
-    public String changePassword(String password ) {
+    public String changePassword( ChangeUserPasswordDto password ) {
 
         UserModel model = getUser();
 
-        model.setPassword( passwordEncoder.encode( password ) ) ;
+
+        if(!passwordEncoder.matches( password.getCurrentPassword() , model.getPassword() ))
+            throw new RuntimeException( "Please enter correct password" );
+
+        if( !password.getNewPassword().equals( password.getConfirmPassword() ) )
+            throw new RuntimeException( "Password doesn't match" );
+
+
+        model.setPassword( passwordEncoder.encode( password.getNewPassword() ) ) ;
 
         userEntityRepository.save(model);
 
         return "Password has been updated";
     }
 
+    @Override
     public UserModel getUser(  ){
+
+        System.out.println("here is problem in get user");
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder
                 .getContext()
@@ -120,5 +131,7 @@ public class ManageUserServiceImpl implements ManageUserService{
                         new UserDoesNotExtistException("User doesn't exist") );
 
     }
+
+
 
 }

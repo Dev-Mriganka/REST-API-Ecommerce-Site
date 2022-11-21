@@ -1,9 +1,6 @@
 package com.mini_project.service;
 
-import com.mini_project.model.Address;
-import com.mini_project.model.AuthenticatedResponseDto;
-import com.mini_project.model.RegisterDto;
-import com.mini_project.model.UserLoginDto;
+import com.mini_project.model.*;
 
 public interface ManageUserService {
 
@@ -11,7 +8,8 @@ public interface ManageUserService {
     public AuthenticatedResponseDto loginUser(UserLoginDto loginDto);
 
     public String addAddress(Address address );
-    public String changePassword( String password  );
+    public String changePassword( ChangeUserPasswordDto password  );
 
+    public UserModel getUser();
 
 }
