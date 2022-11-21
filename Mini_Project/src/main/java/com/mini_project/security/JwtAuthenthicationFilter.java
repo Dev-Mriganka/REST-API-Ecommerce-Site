@@ -62,13 +62,17 @@ public class JwtAuthenthicationFilter extends OncePerRequestFilter {
 
         String bearer = request.getHeader( "Authorization" );
 
-        return null;
+        try {
 
-        if(StringUtils.hasText( bearer ) && bearer.startsWith( "Bearer " ) ){
+            if (StringUtils.hasText(bearer) && bearer.startsWith("Bearer ")) {
 
-            String token = bearer.substring( 7 );
+                String token = bearer.substring(7);
 
-            return token;
+                return token;
+            }
+        }
+        catch(Exception e){
+            throw new RuntimeException( "Invalid token! Looking suspicious" );
         }
 
 
