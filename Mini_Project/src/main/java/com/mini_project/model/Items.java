@@ -1,5 +1,6 @@
 package com.mini_project.model;
 
+import com.mini_project.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
