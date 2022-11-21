@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class ManageUserServiceImpl implements ManageUserService{
@@ -100,7 +102,6 @@ public class ManageUserServiceImpl implements ManageUserService{
 
         UserModel model = getUser();
 
-
         if(!passwordEncoder.matches( password.getCurrentPassword() , model.getPassword() ))
             throw new RuntimeException( "Please enter correct password" );
 
@@ -118,20 +119,25 @@ public class ManageUserServiceImpl implements ManageUserService{
     @Override
     public UserModel getUser(  ){
 
-        System.out.println("here is problem in get user");
+        try {
+            Object o = SecurityContextHolder
+                    .getContext()
+                    .getAuthentication()
+                    .getPrincipal();
 
-        UserDetails userDetails = (UserDetails) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        String username = userDetails.getUsername();
+            UserDetails userDetails = (UserDetails) o;
 
-        return userEntityRepository.findByEmail(username)
-                .orElseThrow( () ->
-                        new UserDoesNotExtistException("User doesn't exist") );
+            String username = userDetails.getUsername();
+
+            return userEntityRepository.findByEmail(username)
+                    .orElseThrow( () ->
+                            new UserDoesNotExtistException("User doesn't exist") );
+        }
+        catch (Exception e){
+            throw new RuntimeException( "Please check the token again" );
+        }
+
 
     }
-
-
 
 }

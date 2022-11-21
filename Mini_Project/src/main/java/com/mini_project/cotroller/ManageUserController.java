@@ -1,5 +1,7 @@
 package com.mini_project.cotroller;
 
+import com.google.common.graph.Graph;
+import com.google.common.graph.Graphs;
 import com.mini_project.model.*;
 import com.mini_project.repository.UserEntityRepository;
 import com.mini_project.security.TokenGenerator;
@@ -61,5 +63,13 @@ public class ManageUserController {
         return new ResponseEntity<>(  s  , HttpStatus.OK );
     }
 
+//    view profile
+//    update mobile no
+//    delete address
+//    view order
+//    cancel orders
+//    update orders
+//    make order
+//    make payment
 
 }
