@@ -10,7 +10,6 @@ public interface OrderService {
     public Orders orderItemsFromCart(Integer addressId);
 
     public List<Orders> getOrderDetail();
-
-    public boolean removeItemFromOrder();
+    
 
 }
