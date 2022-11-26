@@ -26,7 +26,7 @@ public class Items {
 
     private String description;
 
-    private String price;
+    private Double price;
 
     private String image;
 
