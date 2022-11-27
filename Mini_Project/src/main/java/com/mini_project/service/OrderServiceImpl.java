@@ -1,12 +1,9 @@
 package com.mini_project.service;
 
 import com.mini_project.model.*;
-import com.mini_project.repository.AddressRepo;
-import com.mini_project.repository.OrdersRepo;
-import com.mini_project.repository.UserEntityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Service;
+import com.mini_project.repository.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
