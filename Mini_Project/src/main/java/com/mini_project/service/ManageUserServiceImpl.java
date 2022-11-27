@@ -5,6 +5,7 @@ import com.mini_project.exception.UserDoesNotExtistException;
 import com.mini_project.model.*;
 import com.mini_project.repository.RoleEntityRepository;
 import com.mini_project.repository.UserEntityRepository;
+
 import com.mini_project.security.TokenGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
