@@ -1,13 +1,11 @@
 package com.mini_project.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.*;
 
 @Entity
@@ -21,12 +19,17 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @NotNull(message =  "Name feild is Mandatory")
+    @Size(min=3)
+    @NotBlank(message = "Feild should not be null")
     private String name;
 
     private String mobileNumber;
-
+    @Email(message = "Please Enter a valid Emial Address")
     private String email;
 
+    @NonNull
+    @Pattern(regexp="[a-zA-Z0-9]{8,12}",message="Password must contain between 6 to 12 characters. Must be alphanumeric with both Upper and lowercase characters.")
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
