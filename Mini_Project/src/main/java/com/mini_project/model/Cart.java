@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -21,6 +23,9 @@ public class Cart {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemQuantity> items;
+
+    @NotNull(message =  "Please Enter Amount in INR")
+    @NotBlank(message = "Please Enter Right Information")
     private Integer totalPrice;
 
 }
