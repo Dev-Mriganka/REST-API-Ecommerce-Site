@@ -34,6 +34,7 @@ public class Address {
     @NotNull(message = "please Enter Valid State")
     @NotBlank(message = "Please Enter Right Information")
     private String state;
+
      @NotNull( message = "Please Entry Valid Country Name")
      @NotBlank(message = "Please Enter Right Information")
     private String country;

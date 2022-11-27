@@ -19,6 +19,7 @@ public class ItemQuantity {
 
     @ManyToOne
     private Items item;
+
     @Min(value = 1)
     private Integer quantity;
 

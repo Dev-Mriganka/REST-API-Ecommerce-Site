@@ -1,4 +1,4 @@
-package com.mini_project.model;
+package com.mini_project.dto;
 
 import lombok.Getter;
 import lombok.NonNull;

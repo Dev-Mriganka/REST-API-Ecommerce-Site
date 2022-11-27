@@ -1,6 +1,8 @@
-package com.mini_project.model;
+package com.mini_project.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -10,6 +12,8 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RegisterDto {
 
 
@@ -20,7 +24,7 @@ public class RegisterDto {
     @NotBlank(message = "Email shouldn't be blank")
     private String email;
 
-    @NotEmpty(message = "Email feild cannot be empty")
+    @NotEmpty(message = "Email field cannot be empty")
     @NotNull( message = "Email address cannot be null Please try again")
     @NotBlank(message = "Email shouldn't be blank")
     @Size(min = 8 , message = "Password length must be above 8")

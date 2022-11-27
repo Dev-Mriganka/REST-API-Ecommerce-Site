@@ -1,5 +1,9 @@
 package com.mini_project.service;
 
+import com.mini_project.dto.AuthenticatedResponseDto;
+import com.mini_project.dto.ChangeUserPasswordDto;
+import com.mini_project.dto.RegisterDto;
+import com.mini_project.dto.UserLoginDto;
 import com.mini_project.exception.UserAlreadyExsistException;
 import com.mini_project.exception.UserDoesNotExtistException;
 import com.mini_project.model.*;
@@ -17,8 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 
 @Service
 public class ManageUserServiceImpl implements ManageUserService{
@@ -52,6 +54,7 @@ public class ManageUserServiceImpl implements ManageUserService{
         userModel.setName(  model.getName() );
         userModel.setMobileNumber( model.getMobileNo() );
         userModel.setPassword( passwordEncoder.encode( model.getPassword() ) );
+        userModel.setCart( new Cart() );
 
         Role role = roleRepository.findRoleByRole( "ROLE_USER" ).get();
 

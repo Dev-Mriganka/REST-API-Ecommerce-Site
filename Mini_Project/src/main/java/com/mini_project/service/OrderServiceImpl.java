@@ -39,7 +39,6 @@ public class OrderServiceImpl implements OrderService{
 
             orderItemQuantity.setItem( i.getItem() );
             orderItemQuantity.setQuantity( i.getQuantity() );
-            orderItemQuantity.setTimeStamp( LocalDate.now() );
 
             orders.getItemList().add( orderItemQuantity );
 
@@ -61,7 +60,6 @@ public class OrderServiceImpl implements OrderService{
 
         UserModel userModel = userService.getUser();
         return ordersRepo.findAllByUser( userModel ).orElseThrow(()->new RuntimeException("No order made by the user"));
-
 
     }
 

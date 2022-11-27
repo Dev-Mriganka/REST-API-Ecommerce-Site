@@ -4,16 +4,19 @@ import com.mini_project.model.Cart;
 import com.mini_project.model.ItemQuantity;
 import com.mini_project.model.Items;
 import com.mini_project.model.UserModel;
+import com.mini_project.repository.CartRepository;
 import com.mini_project.repository.ItemsRepository;
 import com.mini_project.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class CartServiceImpl implements CartService{
 
     @Autowired
@@ -24,21 +27,22 @@ public class CartServiceImpl implements CartService{
     @Autowired
     private UserEntityRepository userEntityRepository;
 
+
+
     @Override
-    public Cart addItemToCart( Integer id ) {
+    public Cart addItemToCart( Integer itemId ) {
 
         UserModel user = userService.getUser();
-        Items items = itemsRepository.findById( id ).orElseThrow( () -> new RuntimeException("Item not found") );
 
-        if(user.getCart()==null)  user.setCart( new Cart(  ) );
+        Items items = itemsRepository.findById( itemId ).orElseThrow( () -> new RuntimeException("Item not found") );
+
+        if( user.getCart()==null ) user.setCart( new Cart() );
         Cart cart = user.getCart();
 
         if( cart.getItems()==null ) cart.setItems( new ArrayList<>(10) );
 
         List<ItemQuantity> ls =  cart.getItems().stream()
-                                                .filter(i -> {
-                                                    return i.getItem().getId() == id;
-                                                } )
+                                                .filter(i -> i.getItem().getId().equals( itemId ) )
                                                 .toList() ;
 
         if( ls.isEmpty() ){
@@ -76,7 +80,7 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public String removeItemFromCart( Integer id ) {
+    public Cart removeItemFromCart( Integer id ) {
 
         UserModel model = userService.getUser();
 
@@ -110,9 +114,9 @@ public class CartServiceImpl implements CartService{
         }
 
         c.setTotalPrice( Totalprice );
-
         userEntityRepository.save( model );
-        return "Item Removed From Cart";
+
+        return c;
     }
 
     @Override

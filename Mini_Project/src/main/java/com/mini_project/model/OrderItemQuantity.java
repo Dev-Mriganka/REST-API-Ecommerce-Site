@@ -23,6 +23,4 @@ public class OrderItemQuantity {
 
     private Integer quantity;
 
-    private LocalDate timeStamp;
-
 }
