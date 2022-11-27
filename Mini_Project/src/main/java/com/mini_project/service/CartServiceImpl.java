@@ -1,51 +1,126 @@
 package com.mini_project.service;
 
 import com.mini_project.model.Cart;
+import com.mini_project.model.ItemQuantity;
 import com.mini_project.model.Items;
 import com.mini_project.model.UserModel;
 import com.mini_project.repository.ItemsRepository;
+import com.mini_project.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class CartServiceImpl implements CartService{
 
     @Autowired
-    private ManageUserService service;
+    private ManageUserService userService;
     @Autowired
     private ItemsRepository itemsRepository;
+
+    @Autowired
+    private UserEntityRepository userEntityRepository;
 
     @Override
     public Cart addItemToCart( Integer id ) {
 
-        UserModel user = service.getUser();
-        itemsRepository.findById( id );
+        UserModel user = userService.getUser();
+        Items items = itemsRepository.findById( id ).orElseThrow( () -> new RuntimeException("Item not found") );
 
-        if(user.getCart()==null) user.setCart( new Cart(  ) );
+        if(user.getCart()==null)  user.setCart( new Cart(  ) );
         Cart cart = user.getCart();
+
         if( cart.getItems()==null ) cart.setItems( new ArrayList<>(10) );
 
-        cart.getItems().stream().filter( i -> {
-            return i.getItem().getId() == id;
-        } ) ;
+        List<ItemQuantity> ls =  cart.getItems().stream()
+                                                .filter(i -> {
+                                                    return i.getItem().getId() == id;
+                                                } )
+                                                .toList() ;
 
-        return null;
+        if( ls.isEmpty() ){
+
+            ItemQuantity iq = new ItemQuantity();
+
+            iq.setItem( items );
+            iq.setQuantity( 1 );
+
+            cart.getItems().add( iq );
+
+        }
+        else ls.get(0).setQuantity( ls.get(0).getQuantity()+1 );
+
+        double Totalprice = 0;
+        for( ItemQuantity i:cart.getItems()){
+            Totalprice += i.getQuantity() * i.getItem().getPrice();
+        }
+
+        cart.setTotalPrice( Totalprice );
+
+        userEntityRepository.save( user );
+
+        return cart;
     }
 
     @Override
     public Cart getCartInfo() {
-        return null;
+
+        UserModel model = userService.getUser();
+
+        if( model.getCart()==null ) throw new RuntimeException( "You don't have any time in your cart" );
+
+        return model.getCart();
     }
 
     @Override
-    public String removeItemFromCart(Items item) {
-        return null;
+    public String removeItemFromCart( Integer id ) {
+
+        UserModel model = userService.getUser();
+
+        Cart c = model.getCart();
+        if( c==null || c.getItems().isEmpty() ) throw new RuntimeException("Cart is empty");
+
+        List<ItemQuantity> iq = c.getItems();
+
+        ItemQuantity sq = iq.stream().filter( i->{
+            return Objects.equals( i.getItem().getId(), id );
+        } )
+                .findFirst()
+                .orElseThrow( ()-> new RuntimeException("No Item found in cart") );
+
+        if(sq.getQuantity()<=1){
+            int idx = -1;
+            for( int i=0; i<iq.size(); i++) {
+                if(Objects.equals(sq.getId(), iq.get(i).getId())){
+                    idx = i;
+                }
+            }
+            iq.remove(idx);
+        }
+        else{
+            sq.setQuantity( sq.getQuantity()-1 );
+        }
+
+        double Totalprice = 0;
+        for( ItemQuantity i:c.getItems()){
+            Totalprice += i.getQuantity() * i.getItem().getPrice();
+        }
+
+        c.setTotalPrice( Totalprice );
+
+        userEntityRepository.save( model );
+        return "Item Removed From Cart";
     }
 
     @Override
     public Double totalCartAmount() {
-        return null;
+
+        UserModel  model = userService.getUser();
+
+        return model.getCart().getTotalPrice();
     }
 
 }
