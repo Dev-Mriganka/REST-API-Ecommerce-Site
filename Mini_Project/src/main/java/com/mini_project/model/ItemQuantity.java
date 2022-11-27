@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Getter
@@ -18,7 +19,7 @@ public class ItemQuantity {
 
     @ManyToOne
     private Items item;
-
+    @Min(value = 1)
     private Integer quantity;
 
 }

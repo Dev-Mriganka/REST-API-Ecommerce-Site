@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.List;
 
 @Service
 public class DashBoardServiceImpl implements DashBoardService{
@@ -28,9 +26,9 @@ public class DashBoardServiceImpl implements DashBoardService{
 
 
     public List<Orders> getLastWeekSales(){
-        
 
 
+        return null;
     }
 
 
