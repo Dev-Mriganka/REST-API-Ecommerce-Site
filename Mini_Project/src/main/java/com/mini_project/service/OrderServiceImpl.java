@@ -5,9 +5,8 @@ import com.mini_project.repository.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.*;
+import java.util.*;
 import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -17,11 +16,13 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     AddressRepo addressRepo;
+
     @Autowired
     UserEntityRepository userEntityRepository;
 
     @Autowired
     OrdersRepo ordersRepo;
+
     @Override
     public Orders orderItemsFromCart( Integer addressId ) {
 
@@ -54,6 +55,7 @@ public class OrderServiceImpl implements OrderService{
     /**
      * @return Orders list of the current user
      */
+
     @Override
     public List<Orders> getOrderDetail() {
 
@@ -61,6 +63,21 @@ public class OrderServiceImpl implements OrderService{
         return ordersRepo.findAllByUser( userModel ).orElseThrow(()->new RuntimeException("No order made by the user"));
 
 
+    }
+
+    @Override
+    public String cancelOrder(Integer orderId) {
+        return null;
+    }
+
+    @Override
+    public Orders updateOrder(Integer addressId) {
+        return null;
+    }
+
+    @Override
+    public Orders getSingleOrder(Integer orderId) {
+        return null;
     }
 
 
