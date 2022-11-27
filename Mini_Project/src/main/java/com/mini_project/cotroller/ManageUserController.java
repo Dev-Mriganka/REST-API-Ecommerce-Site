@@ -29,7 +29,7 @@ public class ManageUserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/register")
+    @PostMapping("/register") /*USER REGISTRATION*/
     public ResponseEntity<String> registerUser(@Valid @RequestBody RegisterDto model ){
 
         String msg = manageService.registerCustomer( model );
@@ -38,7 +38,7 @@ public class ManageUserController {
 
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login") /*USER LOGIN*/
     public ResponseEntity<AuthenticatedResponseDto> loginUser(@RequestBody UserLoginDto logindto ){
 
         AuthenticatedResponseDto responseDto = manageService.loginUser(logindto);
@@ -46,7 +46,7 @@ public class ManageUserController {
         return new ResponseEntity<>( responseDto , HttpStatus.OK );
     }
 
-    @PutMapping("/address")
+    @PutMapping("/address") /*USER ADDRESS CHANGE*/
     public ResponseEntity<UserModel> addAddress(@RequestBody Address address){
         System.out.println( address.toString() );
         manageService.addAddress( address );
@@ -55,7 +55,8 @@ public class ManageUserController {
 
     }
 
-    @PutMapping
+
+    @PutMapping /*USER PASSWORD CHANGE*/
     public ResponseEntity<String> changePassoword( @RequestBody ChangeUserPasswordDto changePasswordDto ){
 
         String s = manageService.changePassword( changePasswordDto );
