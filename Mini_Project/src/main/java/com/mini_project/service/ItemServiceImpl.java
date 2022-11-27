@@ -16,7 +16,6 @@ public class ItemServiceImpl implements ItemsService{
 
     @Override
     public List<Items> getItemAllItems() {
-
         return itemsRepository.findAll();
     }
 
@@ -53,6 +52,9 @@ public class ItemServiceImpl implements ItemsService{
 
     @Override
     public List<Items> searchItemsByCategory(String type) {
+
+
+
         return null;
     }
 
@@ -63,7 +65,6 @@ public class ItemServiceImpl implements ItemsService{
         return itemsRepository.findAllByPriceBeforeOrderByPriceDesc( price )
                               .orElseThrow( ()-> new RuntimeException("No Items Found"));
 
-
     }
 
 
@@ -71,9 +72,11 @@ public class ItemServiceImpl implements ItemsService{
     public List<Items> sortItemsByPriceLowToHigh(
                                                 @NotNull(message = "Price cannot be blank")
                                                 Double price
-    ) {
+    )
+    {
 
-        List<Items> ls = itemsRepository.findAllByPriceBeforeOrderByPriceAsc(price).orElseThrow(()->new RuntimeException("No Items found"));
+        List<Items> ls = itemsRepository.findAllByPriceBeforeOrderByPriceAsc(price)
+                                        .orElseThrow( ()->new RuntimeException("No Items found") );
 
         return ls;
     }

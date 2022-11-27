@@ -6,6 +6,4 @@ public enum Category {
     WOMEN_COLLECTIONS,
     KIDS_COLLECTIONS;
 
-
-
 }
