@@ -6,4 +6,6 @@ public interface UserService {
 
     UserModel updateUserDetails(UserModel userModel) throws Exception;
 
+
+
 }

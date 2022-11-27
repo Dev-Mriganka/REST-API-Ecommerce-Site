@@ -63,13 +63,6 @@ public class ManageUserController {
         return new ResponseEntity<>(  s  , HttpStatus.OK );
     }
 
-//    view profile
-//    update mobile no
-//    delete address
-//    view order
-//    cancel orders
-//    update orders
-//    make order
-//    make payment
+
 
 }
