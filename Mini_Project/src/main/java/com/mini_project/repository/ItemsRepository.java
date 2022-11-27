@@ -20,5 +20,6 @@ public interface ItemsRepository extends JpaRepository<Items , Integer> {
     public Optional<List<Items>> findAllByPriceBeforeOrderByPriceDesc(Double price);
 
     public Optional<List<Items>> findAllByPriceBeforeOrderByPriceAsc(Double price);
-}
 
+    public Optional<List<Items>> findAllByCategory(String category);
+}

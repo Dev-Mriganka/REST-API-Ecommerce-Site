@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +20,15 @@ public class Orders {
     private Integer id;
 
     @OneToOne
-    @JsonIgnore
     private Address orderAddress;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private UserModel user;
 
+    private Date orderDate;
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<OrderItemQuantity> itemList = new ArrayList<>();
 
 }

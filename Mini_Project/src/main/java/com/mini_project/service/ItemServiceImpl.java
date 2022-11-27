@@ -55,9 +55,9 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public List<Items> searchItemsByCategory( String type ) {
 
+        return itemsRepository.findAllByCategory( type )
+                .orElseThrow(()-> new RuntimeException("No product Found with this Category"));
 
-
-        return null;
     }
 
 
