@@ -24,8 +24,10 @@ public class Cart {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemQuantity> items;
 
+
     @NotNull(message =  "Please Enter Amount in INR")
     @NotBlank(message = "Please Enter Right Information")
-    private Integer totalPrice;
+    private Double totalPrice;
+
 
 }
