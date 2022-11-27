@@ -5,9 +5,12 @@ import com.mini_project.service.ItemsService;
 import com.mini_project.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import java.util.List;
+
+@RestController("v1/mini")
 public class UserController {
 
 //    view profile
@@ -24,6 +27,14 @@ public class UserController {
 
     @Autowired
     private OrderService orderService;
+
+
+    @GetMapping()
+    public ResponseEntity<List<Items>> getAllItems(  ){
+
+        List<Items> ls = itemsService.getItemAllItems();
+        return null;
+    }
 
 
 
