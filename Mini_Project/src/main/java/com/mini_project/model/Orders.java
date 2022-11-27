@@ -26,7 +26,6 @@ public class Orders {
     @JsonIgnore
     private UserModel user;
 
-
     @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
     private List<OrderItemQuantity> itemList = new ArrayList<>();

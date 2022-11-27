@@ -1,0 +1,13 @@
+package com.mini_project.enums;
+
+public enum SubCategoryKids {
+
+    TSHIRTS, SHIRTS,
+    SHORTS, JEANS, TROUSERS, TRACKPANTS_AND_PYJAMAS,
+    ETHNIC_WEAR,
+    JACKETS, SWEATER, SWEATSHIRTS, INNERWEAR, THEARMALS, NIGHTWEAR,
+    CLOTHING_SETS,
+    LOUNGEWEAR,
+    PART_WEAR
+
+}
