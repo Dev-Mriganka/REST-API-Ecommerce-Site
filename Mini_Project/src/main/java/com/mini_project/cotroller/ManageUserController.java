@@ -1,18 +1,15 @@
 package com.mini_project.cotroller;
 
-import com.google.common.graph.Graph;
-import com.google.common.graph.Graphs;
+import com.mini_project.dto.AuthenticatedResponseDto;
+import com.mini_project.dto.ChangeUserPasswordDto;
+import com.mini_project.dto.RegisterDto;
+import com.mini_project.dto.UserLoginDto;
 import com.mini_project.model.*;
-import com.mini_project.repository.UserEntityRepository;
-import com.mini_project.security.TokenGenerator;
 import com.mini_project.service.ManageUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

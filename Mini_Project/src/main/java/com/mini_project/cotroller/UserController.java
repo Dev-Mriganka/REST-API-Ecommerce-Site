@@ -1,20 +1,19 @@
 package com.mini_project.cotroller;
 
+import com.mini_project.model.Cart;
 import com.mini_project.model.Items;
+import com.mini_project.service.CartService;
 import com.mini_project.service.ItemsService;
 import com.mini_project.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@RestController("v1/mini")
+@RestController("user")
 public class UserController {
 
 //    view profile
@@ -32,6 +31,8 @@ public class UserController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/")
     public ResponseEntity<List<Items>> getAllItems(  ){
@@ -65,12 +66,12 @@ public class UserController {
 
 
 
-    @GetMapping("/items/{price}")
-    public ResponseEntity<List<Items>> itemsLowToHigh(@PathVariable("price") Double price){
-
-        return new ResponseEntity<List<Items>>( itemsService.sortItemsByPriceLowToHigh(price), HttpStatus.OK);
-
-    }
+//    @GetMapping("/items/{price}")
+//    public ResponseEntity<List<Items>> itemsLowToHigh(@PathVariable("price") Double price){
+//
+//        return new ResponseEntity<List<Items>>( itemsService.sortItemsByPriceLowToHigh(price), HttpStatus.OK);
+//
+//    }
 
     @GetMapping("/items")
     public ResponseEntity<List<Items>> itemsHighToLow(@RequestParam("price") Double price){
@@ -79,10 +80,32 @@ public class UserController {
 
     }
 
+    @PostMapping("/additemstocart")
+    public  ResponseEntity<Cart> addItemsToCart(@RequestParam Integer id){
+
+        return new ResponseEntity<>(cartService.addItemToCart(id), HttpStatus.CREATED) ;
+
+    }
+
+    @GetMapping("/getallcartdetails")
+    public ResponseEntity<Cart> getCartInfo(){
+
+        return new ResponseEntity<Cart> (cartService.getCartInfo(), HttpStatus.ACCEPTED);
+
+    }
 
 
+    @PutMapping("/delete/quantity")
+    public ResponseEntity<Cart> removeItemFromCart( @RequestParam Integer id ){
 
+        return new ResponseEntity<>(cartService.removeItemFromCart( id ) , HttpStatus.OK) ;
 
+    }
 
+    @GetMapping("/total")
+    public ResponseEntity< Double > totalCartAmount(){
+
+        return new ResponseEntity<>( cartService.totalCartAmount() , HttpStatus.OK );
+    }
 
 }
