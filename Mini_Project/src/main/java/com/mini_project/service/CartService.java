@@ -5,7 +5,7 @@ import com.mini_project.model.Items;
 
 public interface CartService {
 
-    public Cart addItemToCart( Items item );
+    public Cart addItemToCart( Integer id );
     public Cart getCartInfo();
     public String removeItemFromCart( Items item );
     public Double totalCartAmount();

@@ -21,7 +21,6 @@ public class Cart {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemQuantity> items;
-
     private Integer totalPrice;
 
 }

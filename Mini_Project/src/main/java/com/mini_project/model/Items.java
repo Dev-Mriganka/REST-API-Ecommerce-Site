@@ -27,6 +27,6 @@ public class Items {
 
     private String image;
     
-    private Category category;
+    private String category;
 
 }

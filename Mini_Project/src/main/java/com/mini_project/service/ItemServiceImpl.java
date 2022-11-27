@@ -3,15 +3,17 @@ package com.mini_project.service;
 import com.mini_project.model.Items;
 import com.mini_project.repository.ItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-
+@Service
 public class ItemServiceImpl implements ItemsService{
 
 
     @Autowired
     ItemsRepository itemsRepository;
+
 
 
     @Override
@@ -51,7 +53,7 @@ public class ItemServiceImpl implements ItemsService{
 
 
     @Override
-    public List<Items> searchItemsByCategory(String type) {
+    public List<Items> searchItemsByCategory( String type ) {
 
 
 
