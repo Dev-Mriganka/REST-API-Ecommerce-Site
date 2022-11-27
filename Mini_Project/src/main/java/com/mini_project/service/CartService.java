@@ -7,7 +7,7 @@ public interface CartService {
 
     public Cart addItemToCart( Integer id );
     public Cart getCartInfo();
-    public String removeItemFromCart( Items item );
+    public String removeItemFromCart( Integer item );
     public Double totalCartAmount();
 
 }
