@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.List;
+
 @Service
 public class DashBoardServiceImpl implements DashBoardService{
 
@@ -14,54 +18,23 @@ public class DashBoardServiceImpl implements DashBoardService{
 
     public List<Orders> getTodaySales(){
 
-         new Date(Calendar.getInstance().getTimeInMillis());
-        List<Orders> orders = ordersRepo.getTodaysSale(localDate);
 
-        if(orders.size() == 0) throw new RuntimeException("no sales recorded for : " + localDate);
+        List<Orders> orders = ordersRepo.getTodaysSale(new Date(Calendar.getInstance().getTimeInMillis()));
+
+        if(orders.size() == 0) throw new RuntimeException("no sales recorded for : " + new Date(Calendar.getInstance().getTimeInMillis()));
 
         return orders;
     }
 
+    @Override
+    public List<Orders> getAllOrders() {
 
-    public List<Orders> getLastWeekSales(){
+           List<Orders> orders = ordersRepo.findAll();
 
+           if(orders.size() == 0) throw new RuntimeException("no orders recorded");
 
-
+           return orders;
     }
 
 
-    public List<Orders> getLastMonthSales(){
-
-        return null;
-    }
-
-
-    public List<Orders> getSalesBetween(LocalDate from , LocalDate to ){
-
-        return null;
-    }
-
-
-    public List<Orders> getMostSoldItems(){
-
-        return null;
-    }
-
-
-    public List<Orders> highestRatedProduct(){
-
-        return null;
-    }
-
-
-    public List<Orders> mostSoldItemInGivenRange( Integer from , Integer to ){
-
-        return null;
-    }
-
-
-    public List<Orders> mostSoldProductFromEveryCategory(){
-
-        return null;
-    }
 }
