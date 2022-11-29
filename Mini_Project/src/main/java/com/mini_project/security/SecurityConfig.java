@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import com.mini_project.repository.RoleRepository;
 import java.net.http.HttpRequest;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.*;
@@ -28,13 +28,12 @@ import static org.springframework.security.config.http.SessionCreationPolicy.*;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-
     private final JwtAuthenthicationFilter jwtAuthenthicationFilter;
     private final JwtAuthenticationEntryPoint entryPoint;
 
-
     @Autowired
-    public SecurityConfig(JwtAuthenticationEntryPoint entryPoint, JwtAuthenthicationFilter jwtAuthenthicationFilter){
+    public SecurityConfig(JwtAuthenticationEntryPoint entryPoint,
+            JwtAuthenthicationFilter jwtAuthenthicationFilter) {
         this.entryPoint = entryPoint;
         this.jwtAuthenthicationFilter = jwtAuthenthicationFilter;
     }
@@ -42,36 +41,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-            http
+        http
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPoint)
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy( STATELESS )
+                .sessionCreationPolicy(STATELESS)
                 .and()
                 .authorizeRequests()
-                    .antMatchers("/**")
-                    .permitAll()
+                .antMatchers("/**")
+                .permitAll()
                 .and()
                 .httpBasic();
 
-        http.addFilterBefore( jwtAuthenthicationFilter , UsernamePasswordAuthenticationFilter.class );
+        http.addFilterBefore(jwtAuthenthicationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     @Bean
     public AuthenticationManager manager(AuthenticationConfiguration configuration)
-            throws Exception
-    {
+            throws Exception {
 
         return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder encoder(){
-        return new BCryptPasswordEncoder(  );
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }

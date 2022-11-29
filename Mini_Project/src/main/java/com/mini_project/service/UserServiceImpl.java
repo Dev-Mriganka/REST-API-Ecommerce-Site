@@ -3,6 +3,7 @@ package com.mini_project.service;
 import com.mini_project.exception.LoginException;
 import com.mini_project.model.UserModel;
 import com.mini_project.repository.ItemsRepository;
+import com.mini_project.repository.RoleRepository;
 import com.mini_project.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private UserEntityRepository entityRepository;
-
+    private RoleRepository roleEntityRepository;
     private ItemsRepository itemsRepository;
 
     @Autowired
@@ -41,5 +42,10 @@ public class UserServiceImpl implements UserService {
         return  entityRepository.save(user);
 
     }
+
+    // public static void checkRoleInDatabase(){
+    //      roleEntityRepository.f
+
+    // }
 
 }

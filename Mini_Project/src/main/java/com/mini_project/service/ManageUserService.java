@@ -1,5 +1,7 @@
 package com.mini_project.service;
 
+import java.util.List;
+
 import com.mini_project.dto.AuthenticatedResponseDto;
 import com.mini_project.dto.ChangeUserPasswordDto;
 import com.mini_project.dto.RegisterDto;
@@ -8,12 +10,22 @@ import com.mini_project.model.*;
 
 public interface ManageUserService {
 
-    public String registerCustomer(RegisterDto registerDto ) ;
+    public String registerCustomer(RegisterDto registerDto, String userType);
+    
     public AuthenticatedResponseDto loginUser(UserLoginDto loginDto);
 
-    public String addAddress(Address address );
-    public String changePassword( ChangeUserPasswordDto password  );
+    public String addAddress(Address address);
+    
+    public String changePassword(ChangeUserPasswordDto password);
 
     public UserModel getUser();
 
+    public Address editAddress(Address address);
+    
+    public String deleteAddress(Integer addressId);
+
+    public Address getAddress(Integer addressId);
+    
+    public List<Address> getAllOfUser();
+    
 }

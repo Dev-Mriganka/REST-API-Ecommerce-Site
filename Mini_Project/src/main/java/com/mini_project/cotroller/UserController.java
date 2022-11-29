@@ -1,9 +1,11 @@
 package com.mini_project.cotroller;
 
+import com.mini_project.model.Address;
 import com.mini_project.model.Cart;
 import com.mini_project.model.Items;
 import com.mini_project.service.CartService;
 import com.mini_project.service.ItemsService;
+import com.mini_project.service.ManageUserService;
 import com.mini_project.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,9 @@ public class UserController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private ManageUserService manageUserService;
+
     @GetMapping("/")
     public ResponseEntity<List<Items>> getAllItems() {
 
@@ -43,7 +48,7 @@ public class UserController {
 
     }
 
-    public ResponseEntity<List<Items>> getItemsByCategory( String category) {
+    public ResponseEntity<List<Items>> getItemsByCategory(String category) {
 
         return new ResponseEntity<>(itemsService.searchItemsByCategory(category), HttpStatus.OK);
 
@@ -109,4 +114,28 @@ public class UserController {
         return new ResponseEntity<>(cartService.totalCartAmount(), HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{Id}")
+    public ResponseEntity<String> deleteAddressHandler(@PathVariable("Id") Integer Id) {
+
+        return new ResponseEntity<>(manageUserService.deleteAddress(Id), HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Address> editAddressEntity(@RequestBody Address address) {
+
+        return new ResponseEntity<Address>(manageUserService.editAddress(address), HttpStatus.ACCEPTED);
+
+    }
+
+
+    @GetMapping("/address/{id}")
+    public ResponseEntity<Address> getAddress(@PathVariable("id") Integer addressId) {
+
+        return new ResponseEntity<>(manageUserService.getAddress(addressId), HttpStatus.OK);
+    }
+
+    @GetMapping("/addresses")
+    public ResponseEntity<List<Address>> getAllAdress(){
+        return new ResponseEntity<List<Address>>(manageUserService.getAllOfUser() , HttpStatus.FOUND);
+    }
 }

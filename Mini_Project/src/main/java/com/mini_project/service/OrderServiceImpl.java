@@ -8,8 +8,9 @@ import org.springframework.stereotype.*;
 import java.time.*;
 import java.util.*;
 import java.util.List;
+
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     ManageUserService userService;
@@ -24,29 +25,30 @@ public class OrderServiceImpl implements OrderService{
     OrdersRepo ordersRepo;
 
     @Override
-    public Orders orderItemsFromCart( Integer addressId ) {
+    public Orders orderItemsFromCart(Integer addressId) {
 
-        UserModel user =  userService.getUser();
+        UserModel user = userService.getUser();
 
         Orders orders = new Orders();
-        orders.setOrderAddress( addressRepo.findById( addressId ).orElseThrow(()-> new RuntimeException( "Please add a valid address" )) );
-        orders.setUser( user );
-        orders.setItemList( new ArrayList<>());
+        orders.setOrderAddress(
+                addressRepo.findById(addressId).orElseThrow(() -> new RuntimeException("Please add a valid address")));
+        orders.setUser(user);
+        orders.setItemList(new ArrayList<>());
 
-        for(ItemQuantity i:user.getCart().getItems() ){
+        for (ItemQuantity i : user.getCart().getItems()) {
 
             OrderItemQuantity orderItemQuantity = new OrderItemQuantity();
 
-            orderItemQuantity.setItem( i.getItem() );
-            orderItemQuantity.setQuantity( i.getQuantity() );
+            orderItemQuantity.setItem(i.getItem());
+            orderItemQuantity.setQuantity(i.getQuantity());
 
-            orders.getItemList().add( orderItemQuantity );
+            orders.getItemList().add(orderItemQuantity);
 
         }
-        user.getCart().setItems( new ArrayList<>() );
+        user.getCart().setItems(new ArrayList<>());
 
-        userEntityRepository.save( user );
-        ordersRepo.save( orders );
+        userEntityRepository.save(user);
+        ordersRepo.save(orders);
 
         return orders;
     }
@@ -59,7 +61,8 @@ public class OrderServiceImpl implements OrderService{
     public List<Orders> getOrderDetail() {
 
         UserModel userModel = userService.getUser();
-        return ordersRepo.findAllByUser( userModel ).orElseThrow(()->new RuntimeException("No order made by the user"));
+
+        return ordersRepo.findAllByUser(userModel).orElseThrow(() -> new RuntimeException("No order made by the user"));
 
     }
 
@@ -77,6 +80,5 @@ public class OrderServiceImpl implements OrderService{
     public Orders getSingleOrder(Integer orderId) {
         return null;
     }
-
 
 }

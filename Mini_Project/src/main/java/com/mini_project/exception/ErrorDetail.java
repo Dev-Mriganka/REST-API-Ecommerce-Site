@@ -15,6 +15,7 @@ public class ErrorDetail {
     private String description;
     public ErrorDetail(){
         this.timeStamp = LocalDateTime.now();
+        
     }
 
     public ErrorDetail( String mssg , String description ){
