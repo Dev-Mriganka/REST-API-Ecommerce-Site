@@ -10,6 +10,7 @@ import com.mini_project.repository.RoleEntityRepository;
 import com.mini_project.repository.UserEntityRepository;
 import com.mini_project.security.TokenGenerator;
 import org.jetbrains.annotations.NotNull;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -48,6 +49,9 @@ public class ManageUserServiceImpl implements ManageUserService {
     @Autowired
     private AddressRepo addressRepo;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public String registerCustomer(RegisterDto model, String userType) {
 
@@ -62,7 +66,7 @@ public class ManageUserServiceImpl implements ManageUserService {
         userModel.setPassword(passwordEncoder.encode(model.getPassword()));
         userModel.setCart(new Cart());
 
-        Role role = roleRepository.findRoleByRole("ROLE_USER").get();
+        Role role = roleRepository.findRoleByRole(userType).get();
 
         userModel.setRoles(Collections.singletonList(role));
 
@@ -93,8 +97,7 @@ public class ManageUserServiceImpl implements ManageUserService {
 
         UserModel model = getUser();
 
-        if (!model.getAddress().add(address))
-            throw new RuntimeException("Address already added");
+        model.getAddress().add(address);
 
         userEntityRepository.save(model);
 

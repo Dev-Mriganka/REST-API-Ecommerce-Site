@@ -2,6 +2,7 @@ package com.mini_project.service;
 
 import com.mini_project.model.*;
 import com.mini_project.repository.*;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
@@ -13,16 +14,17 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    ManageUserService userService;
+    private  ManageUserService userService;
 
     @Autowired
-    AddressRepo addressRepo;
+    private  AddressRepo addressRepo;
 
     @Autowired
-    UserEntityRepository userEntityRepository;
+    private UserEntityRepository userEntityRepository;
 
     @Autowired
-    OrdersRepo ordersRepo;
+    private OrdersRepo ordersRepo;
+
 
     @Override
     public Orders orderItemsFromCart(Integer addressId) {
@@ -68,17 +70,42 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public String cancelOrder(Integer orderId) {
-        return null;
-    }
 
-    @Override
-    public Orders updateOrder(Integer addressId) {
-        return null;
+        UserModel model = userService.getUser();
+
+        Orders order =  ordersRepo.findById(orderId).
+                orElseThrow(()-> new RuntimeException
+                                ("Order not found by the id " + orderId));
+
+        if(order.getUser().getId() == model.getId()){
+
+            ordersRepo.delete(order);
+
+            return "Order deleted successfully";
+
+        }
+
+        throw new RuntimeException("Invalid Order id " + orderId);
     }
 
     @Override
     public Orders getSingleOrder(Integer orderId) {
-        return null;
+
+        Orders order = ordersRepo.findById(orderId).
+                orElseThrow(()-> new RuntimeException("Order not found by the id " + orderId));
+
+        return order;
+
+    }
+
+    @Override
+    public Orders changeOrderStatus(Integer orderId, String status) {
+
+        Orders order = ordersRepo.findById(orderId).orElseThrow(() -> new RuntimeException("Invalid Order Id Passed By User"));
+
+        order.setOrderStatus(status);
+
+        return  ordersRepo.save(order);
     }
 
 }

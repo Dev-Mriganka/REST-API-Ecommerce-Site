@@ -5,12 +5,16 @@ import com.mini_project.model.Items;
 
 public interface CartService {
 
-    public Cart addItemToCart( Integer id );
+    Cart addItemToCart( Integer id );
 
-    public Cart getCartInfo();
+    Cart getCartInfo();
 
-    public Cart removeItemFromCart( Integer item );
+    Cart removeItemFromCart( Integer item );
 
-    public Double totalCartAmount();
+    Double totalCartAmount();
+
+    Cart increaseQuantity(Integer itemId);
+
+    Cart decreaseQuantity(Integer itemId);
 
 }

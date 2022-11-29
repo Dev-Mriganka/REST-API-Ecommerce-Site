@@ -10,22 +10,22 @@ import com.mini_project.model.*;
 
 public interface ManageUserService {
 
-    public String registerCustomer(RegisterDto registerDto, String userType);
+    String registerCustomer(RegisterDto registerDto, String userType);
     
-    public AuthenticatedResponseDto loginUser(UserLoginDto loginDto);
+    AuthenticatedResponseDto loginUser(UserLoginDto loginDto);
 
-    public String addAddress(Address address);
+    String addAddress(Address address);
     
-    public String changePassword(ChangeUserPasswordDto password);
+    String changePassword(ChangeUserPasswordDto password);
 
-    public UserModel getUser();
+    UserModel getUser();
 
-    public Address editAddress(Address address);
+    Address editAddress(Address address);
     
-    public String deleteAddress(Integer addressId);
+    String deleteAddress(Integer addressId);
 
-    public Address getAddress(Integer addressId);
+    Address getAddress(Integer addressId);
     
-    public List<Address> getAllOfUser();
+    List<Address> getAllOfUser();
     
 }

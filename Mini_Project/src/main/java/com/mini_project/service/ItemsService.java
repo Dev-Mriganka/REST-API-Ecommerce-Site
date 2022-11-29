@@ -9,15 +9,21 @@ import java.util.List;
 @Service
 public interface ItemsService {
 
-    public List<Items> getItemAllItems();
-    public List<Items> searchItemsByName( String itemName );
-    public List<Items> searchItemsByPrice( Integer itemPrice );
-    public List<Items> searchItemsInPriceRange( Integer low , Integer high );
-    public List<Items> searchItemsByCategory( String type );
+    Items getItem(Integer itemId);
 
-    List<Items> sortItemsByPriceHighToLow(Double price);
+    List<Items> getAllItems();
 
-    public List<Items> sortItemsByPriceLowToHigh(Double price);
+    List<Items> searchItemsByName(String itemName);
+
+    List<Items> searchItemsByPrice(String name, Integer itemPrice);
+
+    List<Items> searchItemsInPriceRange(String name , Integer low , Integer high);
+
+    List<Items> searchItemsByCategory(String type);
+
+    List<Items> sortItemsByPriceHighToLow(String name);
+
+    List<Items> sortItemsByPriceLowToHigh( String name);
 
 
 }

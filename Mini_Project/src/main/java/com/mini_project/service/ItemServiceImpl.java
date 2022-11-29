@@ -15,45 +15,48 @@ public class ItemServiceImpl implements ItemsService{
     ItemsRepository itemsRepository;
 
 
+    @Override
+    public Items getItem(Integer itemId){
+
+        return itemsRepository.findById( itemId )
+                .orElseThrow( ()-> new RuntimeException("Item doesn't exsist") );
+    }
 
     @Override
-    public List<Items> getItemAllItems() {
+    public List<Items> getAllItems() {
         return itemsRepository.findAll();
     }
 
 
     @Override
     public List<Items> searchItemsByName(String itemName) {
-
-        return itemsRepository.findAllByNameContains( itemName ).
-                                orElseThrow(()->
+        return itemsRepository.findAllByNameContains( itemName )
+                              .orElseThrow(()->
                                         new RuntimeException("Not Items found"));
     }
 
 
     @Override
-    public List<Items> searchItemsByPrice(Integer itemPrice) {
+    public List<Items> searchItemsByPrice(String name, Integer itemPrice) {
 
-        return itemsRepository.findAllByPrice( (double)itemPrice ).orElseGet( ()->{
-            return itemsRepository
-                    .findAllByPriceIsBetween((double)itemPrice-500 , (double)itemPrice+500)
-                    .orElseThrow(()-> new RuntimeException("No Items found"));
-        } );
+        return itemsRepository.findAllByNameAndPrice( name, (double)itemPrice ).orElseGet( ()-> itemsRepository
+                .findAllByNameAndPriceIsBetween( name, (double)itemPrice-500 , (double)itemPrice+500)
+                .orElseThrow(()-> new RuntimeException("No Items found")));
     }
 
 
     @Override
-    public List<Items> searchItemsInPriceRange(Integer low, Integer high) {
+    public List<Items> searchItemsInPriceRange(String name , Integer low, Integer high) {
 
 
         return itemsRepository
-                .findAllByPriceIsBetween( (double)low , (double)high  )
+                .findAllByNameAndPriceIsBetween(name , (double)low , (double)high)
                 .orElseThrow(()->new RuntimeException("No Items found"));
     }
 
 
     @Override
-    public List<Items> searchItemsByCategory( String type ) {
+    public List<Items> searchItemsByCategory(String type) {
 
         return itemsRepository.findAllByCategory( type )
                 .orElseThrow(()-> new RuntimeException("No product Found with this Category"));
@@ -62,24 +65,20 @@ public class ItemServiceImpl implements ItemsService{
 
 
     @Override
-    public List<Items> sortItemsByPriceHighToLow( Double price ) {
+    public List<Items> sortItemsByPriceHighToLow(String name) {
 
-        return itemsRepository.findAllByPriceBeforeOrderByPriceDesc( price )
+        return itemsRepository.findAllByNameOrderByPriceDesc(name)
                               .orElseThrow( ()-> new RuntimeException("No Items Found"));
 
     }
 
 
     @Override
-    public List<Items> sortItemsByPriceLowToHigh(
-                                                @NotNull(message = "Price cannot be blank")
-                                                Double price
-    )
-    {
+    public List<Items> sortItemsByPriceLowToHigh(String name) {
 
-        List<Items> ls = itemsRepository.findAllByPriceBeforeOrderByPriceAsc(price)
+        return itemsRepository.findAllByNameOrderByPriceAsc(name)
                                         .orElseThrow( ()->new RuntimeException("No Items found") );
-
-        return ls;
     }
+
+
 }

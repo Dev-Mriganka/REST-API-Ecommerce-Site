@@ -21,13 +21,12 @@ public class CartServiceImpl implements CartService{
 
     @Autowired
     private ManageUserService userService;
+
     @Autowired
     private ItemsRepository itemsRepository;
 
     @Autowired
     private UserEntityRepository userEntityRepository;
-
-
 
     @Override
     public Cart addItemToCart( Integer itemId ) {
@@ -89,24 +88,11 @@ public class CartServiceImpl implements CartService{
 
         List<ItemQuantity> iq = c.getItems();
 
-        ItemQuantity sq = iq.stream().filter( i->{
-            return Objects.equals( i.getItem().getId(), id );
-        } )
+        ItemQuantity sq = iq.stream().filter( i-> Objects.equals( i.getItem().getId(), id ))
                 .findFirst()
                 .orElseThrow( ()-> new RuntimeException("No Item found in cart") );
 
-        if(sq.getQuantity()<=1){
-            int idx = -1;
-            for( int i=0; i<iq.size(); i++) {
-                if(Objects.equals(sq.getId(), iq.get(i).getId())){
-                    idx = i;
-                }
-            }
-            iq.remove(idx);
-        }
-        else{
-            sq.setQuantity( sq.getQuantity()-1 );
-        }
+        iq.removeIf(item -> Objects.equals(item.getItem().getId(), id ) );
 
         double Totalprice = 0;
         for( ItemQuantity i:c.getItems()){
@@ -125,6 +111,73 @@ public class CartServiceImpl implements CartService{
         UserModel  model = userService.getUser();
 
         return model.getCart().getTotalPrice();
+
+    }
+
+    // increment  order quantity
+    @Override
+    public Cart increaseQuantity(Integer itemId){
+
+        UserModel  model = userService.getUser();
+
+        Cart c = model.getCart();
+        if( c==null || c.getItems().isEmpty() ) throw new RuntimeException("Cart is empty");
+
+        Cart cart  =   model.getCart();
+
+        List<ItemQuantity> itemsquantity =  cart.getItems();
+
+        for(ItemQuantity item : itemsquantity){
+
+            if(item.getItem().getId() == itemId){
+
+                item.setQuantity(item.getQuantity()+1);
+            }
+
+        }
+
+        double Totalprice = 0;
+        for( ItemQuantity i:cart.getItems()){
+            Totalprice += i.getQuantity() * i.getItem().getPrice();
+        }
+
+        c.setTotalPrice( Totalprice );
+        userEntityRepository.save( model );
+
+        return c;
+
+    }
+
+    @Override
+    public Cart decreaseQuantity(Integer itemId){
+
+        UserModel model = userService.getUser();
+
+        Cart c = model.getCart();
+        if( c==null || c.getItems().isEmpty() ) throw new RuntimeException("Cart is empty");
+
+        List<ItemQuantity> iq = c.getItems();
+
+        ItemQuantity sq = iq.stream().filter( i-> Objects.equals( i.getItem().getId(), itemId ))
+                .findFirst()
+                .orElseThrow( ()-> new RuntimeException("No Item found in cart") );
+
+        if(sq.getQuantity()<=1)
+            iq.removeIf(item -> Objects.equals(item.getItem().getId(), itemId));
+
+        else sq.setQuantity( sq.getQuantity()-1 );
+
+        double Totalprice = 0;
+
+        for( ItemQuantity i:c.getItems()){
+            Totalprice += i.getQuantity() * i.getItem().getPrice();
+        }
+
+        c.setTotalPrice( Totalprice );
+        userEntityRepository.save( model );
+
+        return c;
+
     }
 
 }

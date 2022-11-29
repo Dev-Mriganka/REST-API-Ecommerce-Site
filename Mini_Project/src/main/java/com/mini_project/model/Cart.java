@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -22,8 +25,6 @@ public class Cart {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemQuantity> items;
 
-
     private Double totalPrice = 0.0;
-
 
 }

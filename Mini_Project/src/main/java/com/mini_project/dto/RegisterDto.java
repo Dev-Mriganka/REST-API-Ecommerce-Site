@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -16,12 +13,16 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class RegisterDto {
 
+    @Size(min = 3, max = 30)
     private String name;
 
+    @Email
     private String email;
 
+    @Pattern(regexp="[a-zA-Z0-9]{8,12}",message="Password must contain between 6 to 12 characters. Must be alphanumeric with both Upper and lowercase characters.")
     private String password;
 
+    @Size(min = 10, max = 10)
     private String mobileNo;
 
 }

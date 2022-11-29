@@ -12,8 +12,8 @@ public interface OrderService {
 
     String cancelOrder (Integer orderId);
 
-    Orders updateOrder(Integer addressId);
-
     Orders getSingleOrder(Integer orderId);
+
+    Orders changeOrderStatus(Integer orderId , String Status);
 
 }

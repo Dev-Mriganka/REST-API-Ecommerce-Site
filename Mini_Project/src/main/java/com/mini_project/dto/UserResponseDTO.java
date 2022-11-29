@@ -16,11 +16,16 @@ import java.util.HashSet;
 @AllArgsConstructor
 public class UserResponseDTO {
 
+    private Integer id;
+
     private String name;
+
     private String mobileNumber;
+
     private String email;
-    private String password;
+
     private Set<Address> address = new HashSet<>();
+
     private Cart cart;
 
 }

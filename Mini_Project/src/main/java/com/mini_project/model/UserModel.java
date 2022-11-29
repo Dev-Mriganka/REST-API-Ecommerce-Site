@@ -30,6 +30,9 @@ public class UserModel {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Orders> orders = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Address> address = new HashSet<>();
 
