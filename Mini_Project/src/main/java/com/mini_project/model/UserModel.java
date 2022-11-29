@@ -19,17 +19,12 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotNull(message =  "Name feild is Mandatory")
-    @Size(min=3)
-    @NotBlank(message = "Feild should not be null")
     private String name;
 
     private String mobileNumber;
-    @Email(message = "Please Enter a valid Emial Address")
+
     private String email;
 
-    @NonNull
-    @Pattern(regexp="[a-zA-Z0-9]{8,12}",message="Password must contain between 6 to 12 characters. Must be alphanumeric with both Upper and lowercase characters.")
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -40,8 +35,5 @@ public class UserModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
-
-
-
 
 }

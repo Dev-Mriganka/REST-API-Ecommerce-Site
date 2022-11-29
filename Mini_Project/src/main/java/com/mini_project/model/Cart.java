@@ -25,9 +25,7 @@ public class Cart {
     private List<ItemQuantity> items;
 
 
-    @NotNull(message =  "Please Enter Amount in INR")
-    @NotBlank(message = "Please Enter Right Information")
-    private Double totalPrice;
+    private Double totalPrice = 0.0;
 
 
 }

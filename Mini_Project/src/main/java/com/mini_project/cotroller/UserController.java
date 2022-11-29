@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@RestController("user")
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
-//    view profile
-//    update mobile no
-//    delete address
-//    view order
-//    cancel orders
-//    update orders
-//    make order
-//    make payment
+    // view profile
+    // update mobile no
+    // delete address
+    // view order
+    // cancel orders
+    // update orders
+    // make order
+    // make payment
 
     @Autowired
     private ItemsService itemsService;
@@ -35,77 +36,77 @@ public class UserController {
     private CartService cartService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Items>> getAllItems(  ){
+    public ResponseEntity<List<Items>> getAllItems() {
 
         List<Items> ls = itemsService.getItemAllItems();
-        return new ResponseEntity<>( ls , HttpStatus.OK );
+        return new ResponseEntity<>(ls, HttpStatus.OK);
 
     }
 
-    public ResponseEntity< List<Items> > getItemsByCategory( @NotNull String category ){
+    public ResponseEntity<List<Items>> getItemsByCategory( String category) {
 
-        return new ResponseEntity<>( itemsService.searchItemsByCategory( category ) ,HttpStatus.OK );
+        return new ResponseEntity<>(itemsService.searchItemsByCategory(category), HttpStatus.OK);
 
     }
 
     @GetMapping("/items/{price}")
-    public ResponseEntity<List<Items>> getItemByPrice(@PathVariable("price") Integer itemprice){
+    public ResponseEntity<List<Items>> getItemByPrice(@PathVariable("price") Integer itemprice) {
 
-       List<Items> itemsList =  itemsService.searchItemsByPrice(itemprice);
+        List<Items> itemsList = itemsService.searchItemsByPrice(itemprice);
 
-       return new ResponseEntity<List<Items>>(itemsList, HttpStatus.ACCEPTED);
+        return new ResponseEntity<List<Items>>(itemsList, HttpStatus.ACCEPTED);
 
     }
 
     @GetMapping("/items/range/{low}/{high}")
-    public ResponseEntity<List<Items>> itemsInRange(@PathVariable("low") Integer low, @PathVariable("hight") Integer high){
+    public ResponseEntity<List<Items>> itemsInRange(@PathVariable("low") Integer low,
+            @PathVariable("high") Integer high) {
 
-        return new ResponseEntity<List<Items>>( itemsService.searchItemsInPriceRange(low, high), HttpStatus.OK);
+        return new ResponseEntity<List<Items>>(itemsService.searchItemsInPriceRange(low, high), HttpStatus.OK);
 
     }
 
-
-
-//    @GetMapping("/items/{price}")
-//    public ResponseEntity<List<Items>> itemsLowToHigh(@PathVariable("price") Double price){
-//
-//        return new ResponseEntity<List<Items>>( itemsService.sortItemsByPriceLowToHigh(price), HttpStatus.OK);
-//
-//    }
+    // @GetMapping("/items/{price}")
+    // public ResponseEntity<List<Items>> itemsLowToHigh(@PathVariable("price")
+    // Double price){
+    //
+    // return new ResponseEntity<List<Items>>(
+    // itemsService.sortItemsByPriceLowToHigh(price), HttpStatus.OK);
+    //
+    // }
 
     @GetMapping("/items")
-    public ResponseEntity<List<Items>> itemsHighToLow(@RequestParam("price") Double price){
+    public ResponseEntity<List<Items>> itemsHighToLow(@RequestParam Double price) {
 
-        return new ResponseEntity<List<Items>>( itemsService.sortItemsByPriceHighToLow(price), HttpStatus.OK);
+        return new ResponseEntity<List<Items>>(itemsService.sortItemsByPriceHighToLow(price), HttpStatus.OK);
 
     }
 
     @PostMapping("/additemstocart")
-    public  ResponseEntity<Cart> addItemsToCart(@RequestParam Integer id){
+    public ResponseEntity<Cart> addItemsToCart(@RequestParam Integer id) {
 
-        return new ResponseEntity<>(cartService.addItemToCart(id), HttpStatus.CREATED) ;
+        return new ResponseEntity<>(cartService.addItemToCart(id), HttpStatus.CREATED);
 
     }
 
     @GetMapping("/getallcartdetails")
-    public ResponseEntity<Cart> getCartInfo(){
+    public ResponseEntity<Cart> getCartInfo() {
 
-        return new ResponseEntity<Cart> (cartService.getCartInfo(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<Cart>(cartService.getCartInfo(), HttpStatus.ACCEPTED);
 
     }
 
-
     @PutMapping("/delete/quantity")
-    public ResponseEntity<Cart> removeItemFromCart( @RequestParam Integer id ){
+    public ResponseEntity<Cart> removeItemFromCart(@RequestParam Integer id) {
 
-        return new ResponseEntity<>(cartService.removeItemFromCart( id ) , HttpStatus.OK) ;
+        return new ResponseEntity<>(cartService.removeItemFromCart(id), HttpStatus.OK);
 
     }
 
     @GetMapping("/total")
-    public ResponseEntity< Double > totalCartAmount(){
+    public ResponseEntity<Double> totalCartAmount() {
 
-        return new ResponseEntity<>( cartService.totalCartAmount() , HttpStatus.OK );
+        return new ResponseEntity<>(cartService.totalCartAmount(), HttpStatus.OK);
     }
 
 }
