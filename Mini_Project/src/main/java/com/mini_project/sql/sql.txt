@@ -1,0 +1,37 @@
+
+"url for registration" : "http://localhost:8888/mini/register"
+
+{
+  "name" : "Sushank",
+  "email" : "sushank@gmail.com",
+  "password": "sushank678",
+  "mobileNo"  : "6204761170"
+}
+
+
+login url: : "http://localhost:8888/mini/login"
+{
+    "email" : "sushank@gmail.com",
+    "password": "sushank678"
+}
+},
+
+
+add address url : http://localhost:8888/mini/address 
+{
+
+  "street" : "91, Lawrence Street",
+  "city" : "Uttarpara",
+  "state" : "WB",
+  "country" : "India",
+  "zipCode" : "712258"
+}
+
+add item url http://localhost:8888/mini/item
+{
+    "name" : "productName",
+    "description" : "Long long Description",
+    "price" : 1201,
+    "image" : "http:linkOfimage.com",
+    "category" : "MENS_COLLECTIONS"
+}

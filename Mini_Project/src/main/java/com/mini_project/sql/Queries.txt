@@ -1,0 +1,16 @@
+Error and bugs to fix in appplication
+
+
+-> usage of UserResponseDto when sending the get request in dashboard controller
+-> make a the separate search controller
+-> on fetching item data it should search all product which contains the name -> Search item by ID
+-> fecth data based which contains names
+-> on deleting Item delete data from item quantity tables too
+-> order date is getting null when placing order and order status to is null
+-> cart table and item quantity table need to be update after placing the order cart value to should be updated
+-> Access denied in Get methods in admin dashboard service
+->
+
+
+
+
