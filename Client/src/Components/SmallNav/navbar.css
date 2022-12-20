@@ -1,0 +1,14 @@
+.quantitydiv{
+border-radius: 10px;
+height: 16px;
+width: 20px;
+margin-left: 10px;
+background-color: black;
+line-height: 15px;
+position: absolute;
+top: 32px;
+font-size: 9px;
+color: white;
+padding: 0 5px;
+min-width: 7px;
+}

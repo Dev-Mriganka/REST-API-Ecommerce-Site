@@ -1,0 +1,29 @@
+.heading {
+  font-size: 23px;
+  width: 90%;
+  margin: 14px auto;
+}
+.container {
+}
+.box div {
+  border: none;
+}
+.box button:hover {
+  /* background-color: white !important; */
+}
+.box li {
+  cursor: pointer;
+  margin-bottom: 3px;
+  transition: transform 0.5s ease;
+}
+.same {
+  transition: transform 0.5s ease;
+  cursor: pointer;
+  margin-top: 8px;
+  padding-left: 16px;
+}
+.box li:hover,
+.same:hover {
+  text-decoration: underline;
+  transform: translate(10px, 0px);
+}

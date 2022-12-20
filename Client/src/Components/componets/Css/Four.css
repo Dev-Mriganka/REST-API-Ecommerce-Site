@@ -1,0 +1,12 @@
+.threeF{
+    display:flex;
+    width: 90%;
+    margin: auto;
+    align-items: center;
+    margin-bottom: 50px;
+    justify-content: space-around;
+}
+.threeF>div>img{
+ height: 600;
+ width: 473;
+}

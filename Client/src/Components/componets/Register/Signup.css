@@ -1,0 +1,100 @@
+.myox{
+    text-align: center;
+    margin: auto;
+    border-top: 8px solid;
+        border-style:dashed;
+}
+.oklo{
+    margin-top: -10px;
+    background-color: rgba(147, 179, 206, 0.627);
+
+}
+.myox h3{
+    font-size: 12px;
+    font-family: Montserrat,sans-serif;
+    margin-top: 10px;
+}
+.myox h2{
+    font-size: 12px;
+    padding: 20px;
+    margin-bottom: -10px;
+    margin-top: -20px;
+}
+.myoxp{
+    font-size: 13px;
+    font-weight: 400;
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.myox h4{
+font-size: 12px;
+text-decoration: underline solid;
+}
+
+
+.form{
+    width: 400px;
+    margin: auto;
+    padding:"10px" ;
+}
+.form h3{
+    font-size: 14px;}
+
+.gg{
+    width: 350px;
+    display: flex;
+   justify-content: center;
+}
+
+.checkbox{
+    display: flex;
+    justify-content:space-evenly;
+}
+.checkbox p{
+    margin-right: 90px;
+}
+.checkbox input{
+    /* background-color: red; */
+    border-radius: 8px;
+}
+.chekbox{
+    margin-top: 15px;
+    background-color: rgba(218, 110, 110, 0.208);
+    display: flex;
+    padding: 10px 0px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.chekbox input{
+    width: 15px;
+}
+spansignup{
+    font-size: 11px;
+    font-style: italic;
+    /* color: #101010; */
+    padding: 10PX 20PX;
+}
+.register{
+    height: 47px;
+    width: 400px;
+    text-align: center;
+    color: #F3F3F3;
+    background-color: #333333;
+    font-weight: 600;
+    border: none;
+    margin-top: 3%;
+}
+input{
+    width: 380px;
+    height: 34px
+}
+::placeholder{
+    padding-left: 20px;
+    /* background-color: #6f3a3a47; */
+    padding: 10px;
+    color: #F3F3F3;
+    /* display: flex; */
+    font-size: 18px;
+}

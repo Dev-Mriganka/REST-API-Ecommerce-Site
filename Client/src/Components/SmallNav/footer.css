@@ -1,0 +1,37 @@
+.flexdiv{
+    display: flex;
+}
+.flexdirC{
+flex-direction: column;
+}
+.flexdirC>h2{
+    border: 2px solid;
+    margin-bottom: 20px;
+    background-color: rgba(250, 235, 215, 0.632);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+}
+
+.listdata{
+    display: flex;
+    justify-content: space-between;
+    width: 63%;
+    margin: auto;
+    text-align: center;
+}
+.formF{
+    width: 300px;
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+position: relative;
+left: 13px;
+bottom: 20px;
+    display: flex;
+    /* background-color: white; */
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 30px 30px;
+}
+
+.lopmo{
+    width: 13px;
+}
