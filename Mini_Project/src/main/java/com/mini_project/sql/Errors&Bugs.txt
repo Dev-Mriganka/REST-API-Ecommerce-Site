@@ -2,7 +2,7 @@ Error and bugs to fix in appplication
 
 
 -> usage of UserResponseDto when sending the get request in dashboard controller
--> make a the separate search controller
+-> make a the  separate search controller
 -> on fetching item data it should search all product which contains the name -> Search item by ID
 -> fecth data based which contains names
 -> on deleting Item delete data from item quantity tables too
