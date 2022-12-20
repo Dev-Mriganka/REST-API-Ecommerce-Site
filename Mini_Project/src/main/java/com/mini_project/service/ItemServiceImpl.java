@@ -67,7 +67,7 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public List<Items> sortItemsByPriceHighToLow(String name) {
 
-        return itemsRepository.findAllByNameOrderByPriceDesc(name)
+        return itemsRepository.findAllByNameContainsOrderByPriceDesc(name)
                               .orElseThrow( ()-> new RuntimeException("No Items Found"));
 
     }
@@ -76,8 +76,9 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public List<Items> sortItemsByPriceLowToHigh(String name) {
 
-        return itemsRepository.findAllByNameOrderByPriceAsc(name)
+        return itemsRepository.findAllByNameContainsOrderByPriceAsc(name)
                                         .orElseThrow( ()->new RuntimeException("No Items found") );
+
     }
 
 

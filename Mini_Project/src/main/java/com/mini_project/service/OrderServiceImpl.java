@@ -6,9 +6,11 @@ import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
+import java.sql.Date;
 import java.time.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -31,23 +33,24 @@ public class OrderServiceImpl implements OrderService {
 
         UserModel user = userService.getUser();
 
-        Orders orders = new Orders();
-        orders.setOrderAddress(
-                addressRepo.findById(addressId).orElseThrow(() -> new RuntimeException("Please add a valid address")));
-        orders.setUser(user);
-        orders.setItemList(new ArrayList<>());
+        Orders orders = Orders.builder()
+                              .orderAddress(addressRepo.findById(addressId).orElseThrow(() -> new RuntimeException("Please add a valid address")))
+                              .user(user)
+                              .itemList(new ArrayList<>())
+                              .orderDate(LocalDateTime.now())
+                              .orderStatus("Placed")
+                              .build();
 
-        for (ItemQuantity i : user.getCart().getItems()) {
+        if( user.getCart().getItems().size() == 0 ) throw new RuntimeException( "No item present in cart" );
 
-            OrderItemQuantity orderItemQuantity = new OrderItemQuantity();
+        List<OrderItemQuantity> orderItems =  user.getCart().getItems()
+                      .stream()
+                      .map( i -> new OrderItemQuantity( i.getItem() , i.getQuantity() ) )
+                      .toList();
 
-            orderItemQuantity.setItem(i.getItem());
-            orderItemQuantity.setQuantity(i.getQuantity());
-
-            orders.getItemList().add(orderItemQuantity);
-
-        }
-        user.getCart().setItems(new ArrayList<>());
+        orders.setItemList( orderItems );
+        user.getCart().setItems( new ArrayList<>() );
+        user.getCart().setTotalPrice( 0.0 );
 
         userEntityRepository.save(user);
         ordersRepo.save(orders);
@@ -77,12 +80,9 @@ public class OrderServiceImpl implements OrderService {
                 orElseThrow(()-> new RuntimeException
                                 ("Order not found by the id " + orderId));
 
-        if(order.getUser().getId() == model.getId()){
-
+        if( Objects.equals( order.getUser().getId() , model.getId() ) ){
             ordersRepo.delete(order);
-
             return "Order deleted successfully";
-
         }
 
         throw new RuntimeException("Invalid Order id " + orderId);

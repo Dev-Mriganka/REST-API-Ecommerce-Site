@@ -1,5 +1,7 @@
 package com.mini_project.service;
 
+import com.mini_project.dto.UserModelDTO;
+import com.mini_project.dto.UserResponseDTO;
 import com.mini_project.exception.LoginException;
 import com.mini_project.model.UserModel;
 import com.mini_project.repository.ItemsRepository;
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserModel updateUserDetails(UserModel userModel) throws LoginException {
+    public UserResponseDTO updateUserDetails(UserModel userModel) throws LoginException {
 
         UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -39,8 +41,17 @@ public class UserServiceImpl implements UserService {
 
         user.setName(userModel.getName());
 
-        return  entityRepository.save(user);
+        UserModel dto = entityRepository.save(user);
 
+
+        return  UserResponseDTO.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .email(dto.getName())
+                .cart(dto.getCart())
+                .mobileNumber(dto.getMobileNumber())
+                .address(dto.getAddress())
+                .build();
     }
 
     // public static void checkRoleInDatabase(){

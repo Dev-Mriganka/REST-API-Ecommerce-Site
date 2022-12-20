@@ -99,6 +99,7 @@ public class CartServiceImpl implements CartService{
             Totalprice += i.getQuantity() * i.getItem().getPrice();
         }
 
+
         c.setTotalPrice( Totalprice );
         userEntityRepository.save( model );
 

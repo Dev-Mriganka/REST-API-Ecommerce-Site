@@ -9,7 +9,16 @@ Error and bugs to fix in appplication
 -> order date is getting null when placing order and order status to is null
 -> cart table and item quantity table need to be update after placing the order cart value to should be updated
 -> Access denied in Get methods in admin dashboard service
-->
+
+--> Get all order/ item
+--> Place order
+--> validation message
+--> product searching
+--> user model DTO
+
+
+
+
 
 
 

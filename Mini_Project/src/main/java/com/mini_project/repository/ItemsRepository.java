@@ -19,11 +19,11 @@ public interface ItemsRepository extends JpaRepository<Items , Integer> {
 
     Optional<List<Items>> findAllByNameAndPriceIsBetween(String name, Double price, Double price2);
 
-    Optional<List<Items>> findAllByNameOrderByPriceDesc(String name);
+    Optional<List<Items>> findAllByNameContainsOrderByPriceDesc(String name);
 
     boolean existsByImage(String url);
 
-    Optional<List<Items>> findAllByNameOrderByPriceAsc(String name);
+    Optional<List<Items>> findAllByNameContainsOrderByPriceAsc(String name);
 
     Optional<List<Items>> findAllByCategory(String category);
 }

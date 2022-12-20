@@ -1,20 +1,20 @@
 package com.mini_project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
-@Setter
+@Setter @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Orders {
 
     @Id
@@ -28,7 +28,7 @@ public class Orders {
     @JsonIgnore
     private UserModel user;
 
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     @Pattern(regexp = "^(Placed | Shipped | OutForDelivery | Delivered | Failed)")
     private String orderStatus;

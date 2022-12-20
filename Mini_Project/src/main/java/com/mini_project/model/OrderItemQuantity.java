@@ -23,4 +23,12 @@ public class OrderItemQuantity {
 
     private Integer quantity;
 
+    public OrderItemQuantity( Items item , Integer quantity ){
+
+        this.item = item;
+        this.quantity = quantity;
+
+    }
+
+
 }

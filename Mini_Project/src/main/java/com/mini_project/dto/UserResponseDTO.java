@@ -1,9 +1,6 @@
 package com.mini_project.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import com.mini_project.model.*;
 
 import java.util.Set;
@@ -14,6 +11,7 @@ import java.util.HashSet;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserResponseDTO {
 
     private Integer id;
