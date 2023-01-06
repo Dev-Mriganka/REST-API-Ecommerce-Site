@@ -21,3 +21,6 @@
 | login | &#10004; | Ability of login from his account |
 | Add Item | &#10004; | Ability of add a new Item on the Cart |
 | Remove a Item | &#10004; | Ability of Remove a Ite
+
+
+[![My Skills](https://skillicons.dev/icons?i=java,mysql,mongodb,postgres,spring,maven,hibernate,git,idea,vscode)](https://skillicons.dev)
