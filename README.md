@@ -44,3 +44,23 @@
 <h4>6. Faiz Ansari </h4>
 
 <h4>7. Shivam Moudgil</h4>
+
+### How To Run Our Project In Your Machine
+
+---
+<h3> STEPS</h3>
+1 : clone our Project into your machine Locally.<br>
+   &nbsp; &nbsp; &nbsp; - open any terminal <br>
+    &nbsp; &nbsp; &nbsp; -git clone [https://github.com/Dev-Mriganka/innate-earth-4569.git](https://github.com/Dev-Mriganka/REST-API-Ecommerce-Site.git) <br>
+    <br>
+
+2 : Open Your STS
+
+3 : Goto File -> Import -> Select Maven -> Choose Existing Maven -> click on browse -> choose the project location 
+            -> select the project -> finish 
+            
+4 : Hooray..! you are now able run our project in your local machine .
+
+
+### THANK YOU
+
