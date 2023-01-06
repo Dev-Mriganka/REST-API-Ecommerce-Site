@@ -51,7 +51,7 @@
 <h3> STEPS</h3>
 1 : clone our Project into your machine Locally.<br>
    &nbsp; &nbsp; &nbsp; - open any terminal <br>
-    &nbsp; &nbsp; &nbsp; -git clone [https://github.com/Dev-Mriganka/innate-earth-4569.git](https://github.com/Dev-Mriganka/REST-API-Ecommerce-Site.git) <br>
+    &nbsp; &nbsp; &nbsp; -git clone [[https://github.com/Dev-Mriganka/innate-earth-4569.git](https://github.com/Dev-Mriganka/REST-API-Ecommerce-Site.git)] <br>
     <br>
 
 2 : Open Your STS
