@@ -24,4 +24,5 @@
 
 
 <b>Tech Stack</b>
-[![My Skills](https://skillicons.dev/icons?i=java, react, mysql , spring, maven , hibernate ,git,idea,vscode, )](https://skillicons.dev)
+
+[![My Skills](https://skillicons.dev/icons?i=java, react, mysql , spring, maven , hibernate ,git,idea,vscode )](https://skillicons.dev)
