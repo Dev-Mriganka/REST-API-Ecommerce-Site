@@ -17,9 +17,7 @@
 
 | Feature  |  Coded?       | Description  |
 |----------|:-------------:|:-------------|
-| Signup/login | &#10004; | Ability of Register himself or login to the with his account|
-| View Product | &#10004; | Ability of See products |
-| Cart | &#10004; | Ability to Add product to its cart |
-| Remove a Cart | &#10004; | Ability of Remove product from  Cart |
+| Signup | &#10004; | Ability of Register himself |
+| login | &#10004; | Ability of login from his account |
 | Add Item | &#10004; | Ability of add a new Item on the Cart |
 | Remove a Item | &#10004; | Ability of Remove a Ite
