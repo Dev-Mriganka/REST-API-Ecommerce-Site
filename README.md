@@ -1,4 +1,5 @@
 ![](http://imgur.com/t3teAxi.png)
+### :handbag: A simple RESTful API for Purchases and Product 
 
 <b>Products Features</b>
 
