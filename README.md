@@ -23,4 +23,5 @@
 | Remove a Item | &#10004; | Ability of Remove a Ite
 
 
-[![My Skills](https://skillicons.dev/icons?i=java,mysql,mongodb,postgres,spring,maven,hibernate,git,idea,vscode)](https://skillicons.dev)
+<b>Tech Stack</b>
+[![My Skills](https://skillicons.dev/icons?i=java, react, mysql , spring, maven , hibernate ,git,idea,vscode, )](https://skillicons.dev)
