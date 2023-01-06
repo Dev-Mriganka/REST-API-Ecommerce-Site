@@ -1,7 +1,7 @@
 ![](http://imgur.com/t3teAxi.png)
 ### :handbag: A simple RESTful API for Purchases and Product 
 
-<b>Products Features</b>
+<b>Admin Features</b>
 
 | Feature  |  Coded?       | Description  |
 |----------|:-------------:|:-------------|
@@ -11,14 +11,15 @@
 | Delete a Product | &#10004; | Ability of Delete a Product |
 | Stock | &#10004; | Ability of Update the Stock |
 | Stock History | &#10004; | Ability to see the Stock History |
+| Dashboard | &#10004; | Ability to see the All  Activity |
 
-<b>Purchase Features</b>
+<b>Customer Features</b>
 
 | Feature  |  Coded?       | Description  |
 |----------|:-------------:|:-------------|
-| Create a Cart | &#10004; | Ability of Create a new Cart |
-| See Cart | &#10004; | Ability to see the Cart and it items |
-| Remove a Cart | &#10004; | Ability of Remove a Cart |
+| Signup/login | &#10004; | Ability of Register himself or login to the with his account|
+| View Product | &#10004; | Ability of See products |
+| Cart | &#10004; | Ability to Add product to its cart |
+| Remove a Cart | &#10004; | Ability of Remove product from  Cart |
 | Add Item | &#10004; | Ability of add a new Item on the Cart |
-| Remove a Item | &#10004; | Ability of Remove a Item from the Cart |
-| Checkout | &#10004; | Ability to Checkout |
+| Remove a Item | &#10004; | Ability of Remove a Ite
