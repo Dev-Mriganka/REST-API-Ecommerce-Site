@@ -26,3 +26,21 @@
 <b>Tech Stack</b>
 
 [![My Skills](https://skillicons.dev/icons?i=java,js,react,mysql,spring,maven,hibernate,git,idea,vscode)](https://skillicons.dev)
+
+
+
+# Team Members
+
+<h4>1. Mriganka Mondal(Team Lead)</h4>
+
+<h4>2. Sushank Mandal</h4>
+
+<h4>3. Rohan Mourya</h4>
+
+<h4>4. Rohit Kumar</h4>
+
+<h4>5. Jitendra Choudhary </h4>
+
+<h4>6. Faiz Ansari </h4>
+
+<h4>6. Shivam Moudgil</h4>
