@@ -1,5 +1,6 @@
 ![](http://imgur.com/t3teAxi.png)
 ### :handbag: A simple RESTful API for Purchases Product 
+A RESTful e-commerce API built with RJava, Spring Boot, and Hibernate. This API allows for CRUD operations on products, orders, and customers
 
 <b>Admin Features</b>
 
