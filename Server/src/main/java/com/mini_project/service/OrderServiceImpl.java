@@ -41,6 +41,9 @@ public class OrderServiceImpl implements OrderService {
                               .orderStatus("Placed")
                               .build();
 
+
+        System.out.println(orders);
+
         if( user.getCart().getItems().size() == 0 ) throw new RuntimeException( "No item present in cart" );
 
         List<OrderItemQuantity> orderItems =  user.getCart().getItems()
@@ -51,9 +54,9 @@ public class OrderServiceImpl implements OrderService {
         orders.setItemList( orderItems );
         user.getCart().setItems( new ArrayList<>() );
         user.getCart().setTotalPrice( 0.0 );
-
-        userEntityRepository.save(user);
         ordersRepo.save(orders);
+        userEntityRepository.save(user);
+
 
         return orders;
     }

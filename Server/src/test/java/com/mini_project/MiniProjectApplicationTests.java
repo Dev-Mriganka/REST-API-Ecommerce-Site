@@ -9,5 +9,4 @@ class MiniProjectApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

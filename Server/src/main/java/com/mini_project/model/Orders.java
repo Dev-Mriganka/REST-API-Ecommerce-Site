@@ -30,7 +30,7 @@ public class Orders {
 
     private LocalDateTime orderDate;
 
-    @Pattern(regexp = "^(Placed | Shipped | OutForDelivery | Delivered | Failed)")
+//    @Pattern(regexp = "^(Placed | Shipped | OutForDelivery | Delivered | Failed)")
     private String orderStatus;
 
     @OneToMany(cascade = CascadeType.ALL)

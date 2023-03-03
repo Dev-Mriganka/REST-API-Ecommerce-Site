@@ -19,7 +19,7 @@ public class RegisterDto {
     @Email
     private String email;
 
-    @Pattern(regexp="[a-zA-Z0-9]{8,12}",message="Password must contain between 6 to 12 characters. Must be alphanumeric with both Upper and lowercase characters.")
+//    @Pattern(regexp="[a-zA-Z0-9]{8,12}",message="Password must contain between 6 to 12 characters. Must be alphanumeric with both Upper and lowercase characters.")
     private String password;
 
     @Size(min = 10, max = 10)

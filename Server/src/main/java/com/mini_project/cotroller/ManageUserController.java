@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/mini")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ManageUserController {
 
     @Autowired
