@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService{
     private UserEntityRepository userEntityRepository;
 
     @Override
-    public Cart addItemToCart( Integer itemId ) {
+    public Cart addItemToCart( Long itemId ) {
 
         UserModel user = userService.getUser();
 
@@ -117,7 +117,7 @@ public class CartServiceImpl implements CartService{
 
     // increment  order quantity
     @Override
-    public Cart increaseQuantity(Integer itemId){
+    public Cart increaseQuantity(Long itemId){
 
         UserModel  model = userService.getUser();
 

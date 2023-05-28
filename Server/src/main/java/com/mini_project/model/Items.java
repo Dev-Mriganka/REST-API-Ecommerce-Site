@@ -19,7 +19,7 @@ public class Items {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Size(min = 4 , max = 55 , message = "name should not be less than 4 character")
 //    @Pattern(regexp="^[A-Za-z]+$" , message = "name should not contain any special character")

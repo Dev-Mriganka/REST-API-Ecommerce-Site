@@ -17,7 +17,7 @@ public interface DashBoardService {
 
     Items updateItem(Items items);
 
-    Items deleteItem(Integer itemId);
+    Items deleteItem(Long itemId);
 
     UserModel getUserDetails(Integer userId);
 
