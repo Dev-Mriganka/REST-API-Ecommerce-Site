@@ -3,10 +3,13 @@ package com.mini_project.service;
 import com.mini_project.model.Items;
 import com.mini_project.repository.ItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class ItemServiceImpl implements ItemsService{
 
@@ -16,7 +19,7 @@ public class ItemServiceImpl implements ItemsService{
 
 
     @Override
-    public Items getItem(Integer itemId){
+    public Items getItem(Long itemId){
 
         return itemsRepository.findById( itemId )
                 .orElseThrow( ()-> new RuntimeException("Item doesn't exsist") );
@@ -25,6 +28,28 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public List<Items> getAllItems() {
         return itemsRepository.findAll();
+    }
+
+    @Override
+    public Page<Items> getAllItems(String searchQuery, Map<String, String> filters, Pageable pagable) {
+        Specification<Items> specification = Specification.where(null);
+
+        if (searchQuery != null && !searchQuery.isEmpty()) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + searchQuery.toLowerCase() + "%"));
+        }
+
+        if (filters != null && !filters.isEmpty()) {
+            for (Map.Entry<String, String> entry : filters.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+
+                specification = specification.and((root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get(key), value));
+            }
+        }
+
+        return itemsRepository.findAll(specification, pagable);
     }
 
 

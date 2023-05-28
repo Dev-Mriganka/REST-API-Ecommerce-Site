@@ -1,16 +1,17 @@
 package com.mini_project.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.mini_project.model.Items;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface ItemsRepository extends JpaRepository<Items , Integer> {
+public interface ItemsRepository extends JpaRepository<Items , Long> {
 
 //    No feild with category present sushank
 //    List<Items> findByCategory(String category);
-
     Optional<List<Items>> findAllByNameContains(String name);
 
     Optional< Items > findByName(String name);
@@ -26,4 +27,6 @@ public interface ItemsRepository extends JpaRepository<Items , Integer> {
     Optional<List<Items>> findAllByNameContainsOrderByPriceAsc(String name);
 
     Optional<List<Items>> findAllByCategory(String category);
+
+    Page<Items> findAll(Specification<Items> specification, Pageable pagable);
 }

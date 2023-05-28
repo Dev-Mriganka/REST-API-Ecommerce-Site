@@ -75,7 +75,7 @@ public class DashBoardServiceImpl implements DashBoardService{
     }
 
     @Override
-    public Items deleteItem(Integer itemId) {
+    public Items deleteItem(Long itemId) {
 
         Items item = itemsRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Invalid Item id"));
 

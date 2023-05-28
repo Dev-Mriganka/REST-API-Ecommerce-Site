@@ -57,7 +57,7 @@ public class DashBoardController {
 
     // http://localhost:8888/dashboard/item/delete/{id}
     @DeleteMapping("/item/delete/{id}")
-    public ResponseEntity<Items> deleteItemHadler(@PathVariable("id") Integer id){
+    public ResponseEntity<Items> deleteItemHadler(@PathVariable("id") Long id){
 
         return new ResponseEntity<>(dashBoardService.deleteItem(id) ,HttpStatus.CREATED );
     }

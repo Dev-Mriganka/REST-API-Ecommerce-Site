@@ -1,17 +1,20 @@
 package com.mini_project.service;
 
-import com.mini_project.model.Cart;
 import com.mini_project.model.Items;
-import com.mini_project.model.Orders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Map;
+
 @Service
 public interface ItemsService {
 
-    Items getItem(Integer itemId);
+    Items getItem(Long itemId);
 
     List<Items> getAllItems();
+
+    Page<Items> getAllItems(String searchQuery, Map<String, String> specification, Pageable pagable);
 
     List<Items> searchItemsByName(String itemName);
 

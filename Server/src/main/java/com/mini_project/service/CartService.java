@@ -5,7 +5,7 @@ import com.mini_project.model.Items;
 
 public interface CartService {
 
-    Cart addItemToCart( Integer id );
+    Cart addItemToCart( Long id );
 
     Cart getCartInfo();
 
@@ -13,7 +13,7 @@ public interface CartService {
 
     Double totalCartAmount();
 
-    Cart increaseQuantity(Integer itemId);
+    Cart increaseQuantity(Long itemId);
 
     Cart decreaseQuantity(Integer itemId);
 

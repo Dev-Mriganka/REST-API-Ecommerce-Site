@@ -9,13 +9,15 @@ import com.mini_project.service.ItemsService;
 import com.mini_project.service.ManageUserService;
 import com.mini_project.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.NotNull;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -42,6 +44,21 @@ public class UserController {
     private ManageUserService manageUserService;
 
     //---------Search Item Features Start------------
+
+    @GetMapping("/get_items")
+    public ResponseEntity<Page<Items>> getItems(@RequestParam(required = false) String searchQuery,
+                                                @RequestParam(required = false) Map<String, String> filters,
+                                                @RequestParam(defaultValue = "0") int page,
+                                                @RequestParam(defaultValue = "20") int pageSize
+    ) {
+
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Items> itemsPage = itemsService.getAllItems(searchQuery, filters, pageable);
+
+        return new ResponseEntity<>(itemsPage, HttpStatus.OK);
+    }
+
+
     // http://localhost:8888/user/items
     @GetMapping("/items")
     public ResponseEntity<List<Items>> getAllItemsHandler() {
@@ -50,7 +67,7 @@ public class UserController {
     }
     // http://localhost:8888/item/{id}
     @GetMapping("/item/{id}")
-    public ResponseEntity<Items> getItemByIdHandler(@PathVariable("id") Integer itemId){
+    public ResponseEntity<Items> getItemByIdHandler(@PathVariable("id") Long itemId){
         return new ResponseEntity<>(itemsService.getItem(itemId), HttpStatus.OK);
     }
     // http://localhost:8888/{name}
@@ -92,7 +109,7 @@ public class UserController {
     //   http://localhost:8888/user/cart/add
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PostMapping("/cart/add")
-    public ResponseEntity<Cart> addItemsToCartHandler(@RequestParam Integer id) {
+    public ResponseEntity<Cart> addItemsToCartHandler(@RequestParam Long id) {
         return new ResponseEntity<>(cartService.addItemToCart(id), HttpStatus.CREATED);
     }
     //   http://localhost:8888/user/cart/items
@@ -104,7 +121,7 @@ public class UserController {
     //   http://localhost:8888/user/cart/increase/{ItemId}
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PutMapping("/cart/increase/{ItemId}")
-    public ResponseEntity<Cart> increseQuantityHandler(@PathVariable("ItemId") Integer ItemId){
+    public ResponseEntity<Cart> increseQuantityHandler(@PathVariable("ItemId") Long ItemId){
         return new ResponseEntity<>(cartService.increaseQuantity(ItemId), HttpStatus.ACCEPTED);
     }
     //   http://localhost:8888/user/cart/decrease/{ItemId}
